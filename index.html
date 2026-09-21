@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>กรอบงานเนื้อหา TFAC</title>
+<meta name="description" content="กรอบการจัดประเภทเนื้อหาและเกณฑ์ความเสี่ยงของส่วนงานสื่อสารองค์กร สภาวิชาชีพบัญชี ในพระบรมราชูปถัมภ์">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700&family=Sarabun:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root{
+    --paper:#EFEFF1; --surface:#FFFFFF; --surface-2:#F7F7F9;
+    --ink:#1B1C20; --ink-2:#565A63; --ink-3:#7E838C;
+    --line:#D8D9DE; --line-soft:#E8E9ED;
+    --c1:#4A5FC1; --c2:#C0392B;
+    --serif:"Noto Serif Thai",Georgia,serif;
+    --sans:"Sarabun","Noto Sans Thai",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#131418; --surface:#1B1D22; --surface-2:#22252B;
+      --ink:#E8E9EC; --ink-2:#A2A7B0; --ink-3:#7C818A;
+      --line:#2E313A; --line-soft:#262931;
+      --c1:#7385DE; --c2:#D9685C;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#131418; --surface:#1B1D22; --surface-2:#22252B;
+    --ink:#E8E9EC; --ink-2:#A2A7B0; --ink-3:#7C818A;
+    --line:#2E313A; --line-soft:#262931;
+    --c1:#7385DE; --c2:#D9685C;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:var(--sans); font-size:16px; line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding-inline:20px;padding-block:0 80px}
+  p{margin:0 0 14px;max-width:66ch}
+
+  header{padding-block:58px 24px;border-bottom:1px solid var(--ink);margin-bottom:40px}
+  .kicker{
+    font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.16em;
+    color:var(--ink-3);margin:0 0 16px;
+  }
+  h1{
+    font-family:var(--serif);font-weight:700;
+    font-size:clamp(30px,5.6vw,46px);line-height:1.24;letter-spacing:-.01em;
+    margin:0 0 16px;text-wrap:balance;
+  }
+  .stand{font-size:clamp(16px,2.2vw,18.5px);color:var(--ink-2);max-width:56ch;margin:0}
+
+  .docs{display:grid;gap:18px;margin-bottom:52px}
+  .doc{
+    display:block;text-decoration:none;color:inherit;
+    background:var(--surface);border:1px solid var(--line);
+    border-left:5px solid var(--dc);
+    padding:26px 28px 24px;
+  }
+  .doc:hover{border-color:var(--dc)}
+  .doc:focus-visible{outline:2px solid var(--dc);outline-offset:3px}
+  .doc .lbl{
+    font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.13em;
+    color:var(--dc);margin-bottom:10px;
+  }
+  .doc h2{
+    font-family:var(--serif);font-size:clamp(20px,3.2vw,25px);font-weight:600;
+    margin:0 0 10px;line-height:1.35;text-wrap:balance;
+  }
+  .doc p{font-size:15px;color:var(--ink-2);margin:0 0 16px;max-width:60ch}
+  .doc .facts{
+    display:flex;flex-wrap:wrap;gap:6px 22px;
+    font-family:var(--mono);font-size:11.5px;color:var(--ink-3);
+    font-variant-numeric:tabular-nums;
+    padding-top:14px;border-top:1px solid var(--line-soft);
+  }
+
+  .about h3{font-family:var(--serif);font-size:19px;font-weight:600;margin:0 0 10px}
+  .about p{color:var(--ink-2);font-size:15px}
+
+  footer{
+    border-top:1px solid var(--line);margin-top:48px;padding-top:20px;
+    font-size:13px;color:var(--ink-3);display:grid;gap:7px;
+  }
+  footer b{color:var(--ink-2);font-weight:600;font-family:var(--serif)}
+
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="kicker">ส่วนงานสื่อสารองค์กร · สภาวิชาชีพบัญชี ในพระบรมราชูปถัมภ์</p>
+    <h1>กรอบงานเนื้อหา<br>ของส่วนงานสื่อสารองค์กร</h1>
+    <p class="stand">เอกสารสองชิ้นที่ทำงานคู่กัน — ชิ้นแรกบอกว่าเนื้อหาแต่ละชิ้นคือ “อะไร” ชิ้นที่สองบอกว่าต้อง “ตรวจแค่ไหนก่อนเผยแพร่” ทั้งคู่สร้างจากโพสต์จริงบนเพจ ไม่ใช่กรอบทฤษฎี</p>
+  </header>
+
+  <div class="docs">
+
+    <a class="doc" href="./taxonomy.html" style="--dc:var(--c1)">
+      <div class="lbl">เอกสาร 01 · การจัดประเภท</div>
+      <h2>ผังประเภทเนื้อหา จากโพสต์จริงทั้งปี 2569</h2>
+      <p>หลักการจัดประเภท 5 ข้อ ที่ทำให้โพสต์หนึ่งชิ้นเข้าได้ประเภทเดียว พร้อมประเภทเนื้อหา 22 ประเภทใน 4 หมวก สัดส่วนที่เกิดขึ้นจริงตลอดปี และเคสที่จัดยากพร้อมคำตอบ</p>
+      <div class="facts">
+        <span>461 โพสต์</span>
+        <span>22 ประเภท</span>
+        <span>1 ม.ค. – 17 ก.ย. 2569</span>
+      </div>
+    </a>
+
+    <a class="doc" href="./risk.html" style="--dc:var(--c2)">
+      <div class="lbl">เอกสาร 02 · การอนุมัติ</div>
+      <h2>เกณฑ์ความเสี่ยงเนื้อหา และการแบ่งงานสื่อสาร 3 ระดับ</h2>
+      <p>นิยาม “เนื้อหาความเสี่ยงสูง” ที่วัดได้ เกณฑ์ตัดสิน 6 ข้อแบบเข้าข้อเดียวก็สูง ผู้อนุมัติและรอบเวลาตรวจของแต่ละระดับ กฎเลื่อนระดับ และรายการที่ห้ามเผยแพร่</p>
+      <div class="facts">
+        <span>3 ระดับ</span>
+        <span>6 เกณฑ์</span>
+        <span>ร่างเสนอคณะกรรมการ</span>
+      </div>
+    </a>
+
+  </div>
+
+  <section class="about">
+    <h3>ใช้ทั้งสองชิ้นอย่างไร</h3>
+    <p>เริ่มจากเอกสาร 01 เพื่อระบุว่าเนื้อหาชิ้นนั้นเป็นประเภทใด รหัสประเภท (ก1–ง6) เป็นคีย์เดียวกับที่เอกสาร 02 ใช้กำหนดระดับความเสี่ยง จึงเชื่อมต่อกันได้โดยไม่ต้องแปลงข้อมูล และบันทึกลงแบบฟอร์มสั่งงานเป็นสองฟิลด์คือ “ประเภทเนื้อหา” และ “ระดับความเสี่ยง”</p>
+    <p>ตัวเลขและตัวอย่างทั้งหมดมาจากโพสต์สาธารณะบนเพจของสภาวิชาชีพบัญชี ผู้อ่านจึงตรวจสอบย้อนกลับได้ทุกบรรทัด</p>
+  </section>
+
+  <footer>
+    <span><b>สถานะ</b> ร่างเพื่อการหารือภายใน ยังไม่ผ่านการอนุมัติ ชื่อตำแหน่งผู้อนุมัติและรอบเวลาตรวจเป็นข้อเสนอที่รอการยืนยัน</span>
+    <span><b>ที่มาของข้อมูล</b> โพสต์สาธารณะบนเพจ สภาวิชาชีพบัญชี ในพระบรมราชูปถัมภ์ (facebook.com/TFAC.FAMILY)</span>
+    <span><b>ปรับปรุงล่าสุด</b> 21 กันยายน 2569</span>
+  </footer>
+
+</div>
+</body>
+</html>
