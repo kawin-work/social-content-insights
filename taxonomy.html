@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ผังประเภทเนื้อหา TFAC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700&family=Sarabun:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+
+<style>
+  :root{
+    --paper:#EFEFF1;
+    --surface:#FFFFFF;
+    --surface-2:#F7F7F9;
+    --ink:#1B1C20;
+    --ink-2:#565A63;
+    --ink-3:#7E838C;
+    --line:#D8D9DE;
+    --line-soft:#E8E9ED;
+    --r-a:#C0392B;
+    --r-b:#00897B;
+    --r-c:#B8860B;
+    --r-d:#4A5FC1;
+    --serif:"Noto Serif Thai",Georgia,serif;
+    --sans:"Sarabun","Noto Sans Thai",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#131418; --surface:#1B1D22; --surface-2:#22252B;
+      --ink:#E8E9EC; --ink-2:#A2A7B0; --ink-3:#7C818A;
+      --line:#2E313A; --line-soft:#262931;
+      --r-a:#D9685C; --r-b:#16A88F; --r-c:#B0851A; --r-d:#7385DE;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#131418; --surface:#1B1D22; --surface-2:#22252B;
+    --ink:#E8E9EC; --ink-2:#A2A7B0; --ink-3:#7C818A;
+    --line:#2E313A; --line-soft:#262931;
+    --r-a:#D9685C; --r-b:#16A88F; --r-c:#B0851A; --r-d:#7385DE;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:var(--sans); font-size:16px; line-height:1.7; margin:0;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1000px;margin:0 auto;padding-inline:20px;padding-block:0 80px}
+  p{margin:0 0 14px;max-width:70ch}
+  a{color:var(--ink)}
+
+  /* masthead */
+  .masthead{padding-block:46px 22px;border-bottom:1px solid var(--ink);margin-bottom:12px}
+  .kicker{
+    font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.16em;
+    color:var(--ink-3);margin:0 0 16px;
+  }
+  h1{
+    font-family:var(--serif);font-weight:700;
+    font-size:clamp(30px,5.6vw,50px);line-height:1.22;letter-spacing:-.01em;
+    margin:0 0 14px;text-wrap:balance;
+  }
+  .stand{font-size:clamp(16px,2.2vw,18.5px);color:var(--ink-2);max-width:60ch;margin:0}
+  .srcline{
+    display:flex;flex-wrap:wrap;gap:6px 26px;
+    font-family:var(--mono);font-size:11.5px;color:var(--ink-3);
+    padding-block:12px 0;margin-bottom:46px;
+  }
+
+  /* generic section */
+  section{margin-bottom:60px;scroll-margin-top:20px}
+  h2{
+    font-family:var(--serif);font-weight:600;
+    font-size:clamp(21px,3.2vw,27px);line-height:1.35;margin:0 0 8px;
+    text-wrap:balance;
+  }
+  .sub{color:var(--ink-2);max-width:64ch;margin:0 0 24px}
+  h3{font-family:var(--serif);font-size:18px;font-weight:600;margin:28px 0 8px}
+
+  /* broken-axes demo */
+  .broken{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:18px;
+  }
+  .broken div{background:var(--surface);padding:15px 17px}
+  .broken dt{
+    font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.1em;
+    color:var(--ink-3);margin-bottom:7px;
+  }
+  .broken b{font-family:var(--serif);font-size:16px;display:block;margin-bottom:5px}
+  .broken p{font-size:13.5px;color:var(--ink-2);margin:0}
+  .collide{
+    background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--r-a);padding:18px 20px;
+  }
+  .collide .q{font-family:var(--serif);font-size:16.5px;font-weight:600;margin:0 0 8px}
+  .collide p{font-size:14.5px;color:var(--ink-2);margin:0}
+  .collide code{font-family:var(--mono);font-size:12.5px;color:var(--ink)}
+
+  /* principles */
+  ol.principles{list-style:none;margin:0;padding:0;display:grid;gap:2px;background:var(--line);border:1px solid var(--line)}
+  ol.principles li{background:var(--surface);padding:20px 22px;display:grid;grid-template-columns:auto 1fr;gap:0 20px}
+  ol.principles .pn{
+    font-family:var(--mono);font-size:12px;font-weight:600;color:var(--ink-3);
+    grid-row:span 2;padding-top:4px;
+  }
+  ol.principles .pt{font-family:var(--serif);font-size:17.5px;font-weight:600;margin:0 0 6px}
+  ol.principles .pd{font-size:15px;color:var(--ink-2);margin:0;max-width:66ch}
+  ol.principles .pd em{font-style:normal;color:var(--ink);font-weight:600}
+
+  /* year overview */
+  .roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;margin-bottom:10px}
+  .rolecard{
+    background:var(--surface);border:1px solid var(--line);
+    border-top:4px solid var(--rc);padding:18px 20px 16px;
+  }
+  .rolecard .rl{
+    font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.12em;
+    color:var(--rc);margin-bottom:8px;
+  }
+  .rolecard .rn{font-family:var(--serif);font-size:18px;font-weight:600;margin:0 0 10px;line-height:1.35}
+  .rolecard .rv{
+    font-family:var(--mono);font-size:30px;font-weight:600;line-height:1;
+    font-variant-numeric:tabular-nums;margin-bottom:2px;
+  }
+  .rolecard .rp{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin-bottom:10px}
+  .rolecard .rd{font-size:13.5px;color:var(--ink-2);margin:0;line-height:1.55}
+
+  /* taxonomy bands */
+  .band{margin-bottom:34px}
+  .bandhead{
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px;
+    border-bottom:2px solid var(--bc);padding-bottom:9px;margin-bottom:0;
+  }
+  .bandhead h3{font-family:var(--serif);font-size:20px;font-weight:700;margin:0;color:var(--bc)}
+  .bandhead .bmeta{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+  .bandhead .bvoice{font-size:14px;color:var(--ink-2);flex-basis:100%;margin:0}
+
+  .rowlist{display:grid}
+  .row{
+    display:grid;
+    grid-template-columns:52px minmax(190px,1.15fr) 132px minmax(200px,1.5fr);
+    gap:0 16px;align-items:start;
+    padding:14px 0;border-bottom:1px solid var(--line-soft);
+  }
+  .row .code{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--bc);padding-top:3px}
+  .row .name{font-family:var(--serif);font-size:16px;font-weight:600;line-height:1.45}
+  .row .act{font-size:13px;color:var(--ink-3);margin-top:3px;line-height:1.5}
+  .row .act b{color:var(--ink-2);font-weight:600}
+  .meter{display:flex;align-items:center;gap:9px;padding-top:4px}
+  .meter .track{flex:1;height:8px;background:var(--line-soft);border-radius:1px;overflow:hidden}
+  .meter .fill{height:100%;background:var(--bc);border-radius:0 2px 2px 0}
+  .meter .val{
+    font-family:var(--mono);font-size:13px;font-weight:600;
+    font-variant-numeric:tabular-nums;min-width:22px;text-align:right;
+  }
+  .row .ex{font-size:13.5px;color:var(--ink-2);line-height:1.6}
+  .row .ex span{color:var(--ink-3)}
+
+  /* attributes */
+  .attrs{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+  .attrs div{background:var(--surface);padding:16px 18px}
+  .attrs dt{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.1em;color:var(--ink-3);margin-bottom:6px}
+  .attrs b{font-family:var(--serif);font-size:15.5px;display:block;margin-bottom:5px}
+  .attrs p{font-size:13.5px;color:var(--ink-2);margin:0}
+
+  /* hard cases */
+  .cases{display:grid;gap:12px}
+  .case{background:var(--surface);border:1px solid var(--line);padding:17px 20px}
+  .case .quote{font-family:var(--serif);font-size:15.5px;font-weight:600;margin:0 0 8px;line-height:1.5}
+  .case .verdict{
+    font-family:var(--mono);font-size:12px;color:var(--ink-3);margin:0 0 8px;
+  }
+  .case .verdict b{color:var(--ink)}
+  .case .why{font-size:14.5px;color:var(--ink-2);margin:0;max-width:68ch}
+  .case .why b{color:var(--ink);font-weight:600}
+
+  /* findings */
+  ul.finds{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+  ul.finds li{
+    background:var(--surface);border:1px solid var(--line);padding:17px 20px;
+    display:grid;grid-template-columns:auto 1fr;gap:0 20px;align-items:start;
+  }
+  ul.finds .fig{
+    font-family:var(--mono);font-size:26px;font-weight:600;line-height:1.1;
+    font-variant-numeric:tabular-nums;color:var(--ink);min-width:74px;
+  }
+  ul.finds .fig small{display:block;font-size:10.5px;letter-spacing:.1em;color:var(--ink-3);margin-top:5px;font-weight:600}
+  ul.finds .ft{font-family:var(--serif);font-size:16.5px;font-weight:600;margin:0 0 5px}
+  ul.finds .fd{font-size:14.5px;color:var(--ink-2);margin:0;max-width:66ch}
+
+  .method{
+    border-top:1px solid var(--ink);margin-top:56px;padding-top:18px;
+    font-size:13px;color:var(--ink-3);display:grid;gap:7px;
+  }
+  .method b{color:var(--ink-2);font-weight:600;font-family:var(--serif)}
+
+  @media (max-width:760px){
+    .row{grid-template-columns:44px 1fr;gap:4px 12px}
+    .row .meter{grid-column:2;padding-top:8px;max-width:180px}
+    .row .ex{grid-column:2;padding-top:6px}
+    ol.principles li{grid-template-columns:1fr}
+    ol.principles .pn{grid-row:auto;margin-bottom:6px;padding-top:0}
+    ul.finds li{grid-template-columns:1fr;gap:10px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  a:focus-visible{outline:2px solid var(--r-d);outline-offset:3px}
+
+  .sitenav{
+    display:flex;gap:18px;align-items:center;flex-wrap:wrap;
+    padding-block:18px 0;margin:0;font-size:13.5px;
+  }
+  .sitenav a{
+    color:var(--ink-2,#555);text-decoration:none;
+    border-bottom:1px solid currentColor;padding-bottom:1px;
+  }
+  .sitenav a:hover{color:var(--ink,#111)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="sitenav"><a href="./">สารบัญเอกสาร</a><a href="./risk.html">เกณฑ์ความเสี่ยงเนื้อหา</a></p>
+
+  <header class="masthead">
+    <p class="kicker">ส่วนงานสื่อสารองค์กร · สภาวิชาชีพบัญชี ในพระบรมราชูปถัมภ์</p>
+    <h1>ผังประเภทเนื้อหา<br>จากโพสต์จริงทั้งปี 2569</h1>
+    <p class="stand">หลักการจัดประเภทที่ทำให้โพสต์หนึ่งชิ้นเข้าได้ประเภทเดียว พร้อมประเภทเนื้อหา 22 ประเภท และสัดส่วนที่เกิดขึ้นจริงตลอดปี</p>
+  </header>
+  <div class="srcline">
+    <span>ฐานข้อมูล · เพจ TFAC.FAMILY</span>
+    <span>461 โพสต์</span>
+    <span>1 ม.ค. – 17 ก.ย. 2569</span>
+    <span>เฉลี่ย 1.8 โพสต์/วัน</span>
+  </div>
+
+  <!-- ทำไมแบบเดิมพัง -->
+  <section>
+    <h2>ทำไมการจัดประเภทแบบเดิมถึงพัง</h2>
+    <p class="sub">ชุดประเภทที่ใช้กันอยู่ — ประกาศสภา / ประกาศมาตรฐาน / ข่าว / VDO content / ทั่วไป — ไม่ได้ผิดที่ชื่อ แต่ผิดที่เอาเกณฑ์สามแบบมาปนกันในลิสต์เดียว</p>
+    <div class="broken">
+      <div>
+        <dt>เกณฑ์ที่ 1</dt>
+        <b>ประกาศสภา · ประกาศมาตรฐาน</b>
+        <p>แยกตาม “สาระและแหล่งอำนาจ” — เนื้อหานี้ออกโดยใคร มีผลผูกพันแค่ไหน</p>
+      </div>
+      <div>
+        <dt>เกณฑ์ที่ 2</dt>
+        <b>ข่าว</b>
+        <p>แยกตาม “วิธีเล่าเรื่อง” — เขียนเป็นข่าว ไม่ใช่เขียนเป็นประกาศ</p>
+      </div>
+      <div>
+        <dt>เกณฑ์ที่ 3</dt>
+        <b>VDO content</b>
+        <p>แยกตาม “รูปแบบไฟล์” — เป็นคลิป ไม่ใช่ภาพนิ่ง</p>
+      </div>
+    </div>
+    <div class="collide">
+      <p class="q">ผลคือโพสต์เดียวเข้าได้สามช่องพร้อมกัน</p>
+      <p><code>17 ส.ค. · “เลือกตั้ง TFAC ผ่าน e-Voting ครั้งแรก สมาชิกกว่า 17,000 คนร่วมใช้สิทธิ”</code> เป็นข่าว เป็นคลิป และเกี่ยวกับกระบวนการตามข้อบังคับ — สามคนในทีมจึงจัดลงคนละช่องได้โดยไม่มีใครผิด และสิ่งที่จัดไม่ลงจะไหลไปกอง “ทั่วไป” ซึ่งในปีนี้จะกินโพสต์ไปเกือบหนึ่งในสาม</p>
+    </div>
+  </section>
+
+  <!-- หลักการ -->
+  <section>
+    <h2>หลักการจัดประเภท 5 ข้อ</h2>
+    <p class="sub">หลักสี่ข้อแรกตอบว่า “แยกด้วยอะไร” ข้อสุดท้ายคือกติกาที่ทำให้ผังนี้ไม่พังเมื่อใช้จริง</p>
+    <ol class="principles">
+      <li>
+        <span class="pn">01</span>
+        <div>
+          <p class="pt">แยกประเภทด้วยแกนเดียว ที่เหลือเป็นคุณสมบัติ</p>
+          <p class="pd">รูปแบบสื่อ ช่องทาง การยิงโฆษณา และภาษา <em>ไม่ใช่ประเภท</em> แต่เป็นฟิลด์ที่ติดกับโพสต์ได้หลายค่าพร้อมกัน เพราะโพสต์หนึ่งชิ้นเป็นได้ทั้งคลิปและอัลบั้มภาพ แต่มีหน้าที่ต่อผู้อ่านได้อย่างเดียว</p>
+        </div>
+      </li>
+      <li>
+        <span class="pn">02</span>
+        <div>
+          <p class="pt">แกนหลักคือ “สภาฯ พูดในฐานะอะไร”</p>
+          <p class="pd">สภาวิชาชีพบัญชีสวมหมวกสี่ใบ — <em>ผู้กำกับดูแล ผู้ให้บริการสมาชิก สถาบัน และผู้นำความรู้</em> — และหมวกแต่ละใบมีผู้รับสาร ความคาดหวัง ผู้อนุมัติ และวิธีวัดผลต่างกัน ส่วน “เรื่องอะไร” ใช้แยกไม่ได้ เพราะเรื่องอย่าง TFRS โผล่อยู่ในทั้งสี่หมวก</p>
+        </div>
+      </li>
+      <li>
+        <span class="pn">03</span>
+        <div>
+          <p class="pt">ระดับที่สองคือ “ผู้อ่านต้องทำอะไรต่อ”</p>
+          <p class="pd">ภายในหมวกเดียวกัน ใช้สิ่งที่ผู้อ่านต้องทำเป็นตัวแยกประเภทย่อย — ปฏิบัติตาม / ทำภายในกำหนด / สมัคร / ใช้สิทธิ / ค้นหาชื่อตัวเอง / แค่รับรู้ — เพราะเป็น<em>สิ่งเดียวที่อ่านออกจากตัวโพสต์</em> โดยไม่ต้องรู้เบื้องหลังการทำงาน</p>
+        </div>
+      </li>
+      <li>
+        <span class="pn">04</span>
+        <div>
+          <p class="pt">คาบเกี่ยวเมื่อไร ให้ถามว่าใครเสียประโยชน์</p>
+          <p class="pd">เมื่อโพสต์เข้าได้สองประเภท ให้ถามว่า <em>“ถ้าผู้อ่านไม่ทำอะไรเลยหลังเห็นโพสต์นี้ ใครเสียประโยชน์”</em> แล้วเลือกประเภทที่ตรงกับคำตอบ คำถามนี้ตัดสินได้เร็วกว่าการเถียงเรื่องนิยาม และให้คำตอบเดียวกันไม่ว่าใครเป็นคนจัด</p>
+        </div>
+      </li>
+      <li>
+        <span class="pn">05</span>
+        <div>
+          <p class="pt">ห้ามมีหมวด “ทั่วไป”</p>
+          <p class="pd">ทุกโพสต์ต้องมีบ้าน ถ้าจัดไม่ได้ แปลว่า<em>ประเภทยังไม่ครบ ไม่ใช่โพสต์นั้นผิดปกติ</em> — หมวดถังขยะทำให้ตัวเลขทั้งผังใช้วางแผนไม่ได้ ซึ่งเป็นสาเหตุที่รายงานคอนเทนต์ส่วนใหญ่ไม่มีใครเอาไปใช้ต่อ</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ภาพรวม -->
+  <section>
+    <h2>สี่หมวกของสภาฯ ตลอดปี 2569</h2>
+    <p class="sub">สัดส่วนจากโพสต์จริง 461 ชิ้น ระหว่าง 1 มกราคม ถึง 17 กันยายน 2569</p>
+    <div class="roles">
+      <article class="rolecard" style="--rc:var(--r-a)">
+        <div class="rl">หมวด ก</div>
+        <p class="rn">ผู้กำกับดูแล</p>
+        <div class="rv">52</div>
+        <div class="rp">11% ของทั้งปี</div>
+        <p class="rd">พูดโดยอาศัยอำนาจตามกฎหมาย ผู้อ่านต้องปฏิบัติตาม</p>
+      </article>
+      <article class="rolecard" style="--rc:var(--r-b)">
+        <div class="rl">หมวด ข</div>
+        <p class="rn">ผู้ให้บริการสมาชิก</p>
+        <div class="rv">136</div>
+        <div class="rp">30% ของทั้งปี</div>
+        <p class="rd">ขายและส่งมอบบริการ ผู้อ่านต้องสมัครหรือทำตามกำหนด</p>
+      </article>
+      <article class="rolecard" style="--rc:var(--r-c)">
+        <div class="rl">หมวด ค</div>
+        <p class="rn">สถาบันและธรรมาภิบาล</p>
+        <div class="rv">142</div>
+        <div class="rp">31% ของทั้งปี</div>
+        <p class="rd">พูดในฐานะองค์กร ผู้อ่านต้องใช้สิทธิหรือรับรู้สถานะ</p>
+      </article>
+      <article class="rolecard" style="--rc:var(--r-d)">
+        <div class="rl">หมวด ง</div>
+        <p class="rn">ผู้นำความรู้และชุมชน</p>
+        <div class="rv">131</div>
+        <div class="rp">28% ของทั้งปี</div>
+        <p class="rd">ให้ความรู้และดูแลชุมชน ผู้อ่านแค่เรียนรู้หรือมีส่วนร่วม</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ตารางประเภท -->
+  <section>
+    <h2>ประเภทเนื้อหา 22 ประเภท</h2>
+    <p class="sub">ความยาวแถบเทียบกับประเภทที่มากที่สุดของปี (ข3 หลักสูตรอบรม 65 โพสต์) ตัวอย่างทุกบรรทัดเป็นโพสต์ที่เผยแพร่จริง</p>
+
+    <div class="band" style="--bc:var(--r-a)">
+      <div class="bandhead">
+        <h3>ก · ผู้กำกับดูแล</h3>
+        <span class="bmeta">52 โพสต์ · 11%</span>
+        <p class="bvoice">น้ำเสียง: สภาฯ เป็นผู้มีอำนาจ ข้อความต้องตรงกับเอกสารต้นฉบับทุกตัวอักษร</p>
+      </div>
+      <div class="rowlist">
+        <div class="row">
+          <div class="code">ก1</div>
+          <div><div class="name">ประกาศและมติของสภาฯ</div><div class="act"><b>ต้องปฏิบัติตาม</b> — มีเลขที่ประกาศ อ้างอิงได้</div></div>
+          <div class="meter"><div class="track"><div class="fill" style="width:13.8%"></div></div><div class="val">9</div></div>
+          <div class="ex">ประกาศคณะกรรมการจรรยาบรรณ ฉบับที่ 4/2569 <span>·</span> ประกาศคณะกรรมการอำนวยการเลือกตั้ง ที่ 3/2569 <span>·</span> ประกาศสภาวิชาชีพบัญชี ที่ 8/2569</div>
+        </div>
+        <div class="row">
+          <div class="code">ก2</div>
+          <div><div class="name">มาตรฐานและคู่มือวิชาชีพ</div><div class="act"><b>ต้องนำไปใช้ปฏิบัติ</b> — มีผลต่อการทำงานจริง</div></div>
+          <div class="meter"><div class="track"><div class="fill" style="width:10.8%"></div></div><div class="val">7</div></div>
+          <div class="ex">คู่มืออธิบาย TFRS 18 <span>·</span> ประกาศมาตรฐานการสอบบัญชี (ฉบับปรับปรุง) 6 ฉบับ <span>·</span> TSSA 5000 <span>·</span> FAQ ของ TSA for LCE</div>
+        </div>
+        <div class="row">
+          <div class="code">ก3</div>
+          <div><div class="name">ร่างมาตรฐานและการรับฟังความเห็น</div><div class="act"><b>ต้องส่งความเห็นภายในกำหนด</b></div></div>
+          <div class="meter"><div class="track"><div class="fill" style="width:7.7%"></div></div><div class="val">5</div></div>
+          <div class="ex">ร่างมาตรฐานการสอบบัญชี รหัส 240 (ปรับปรุง) <span>·</span> รหัส 570 <span>·</span> ร่างมาตรฐานการให้ความเชื่อมั่นด้านความยั่งยืน รหัส 5000</div>
+        </div>
+        <div class="row">
+          <div class="code">ก4</div>
+          <div><div class="name">แจ้งเตือนและกำกับสถานะสมาชิก</div><div class="act"><b>ต้องตรวจสอบตัวเองและทำภายในกำหนด</b></div></div>
+          <div class="meter"><div class="track"><div class="fill" style="width:21.5%"></div></div><div class="val">14</div></div>
+          <div class="ex">Alert ยืนยันรายชื่อกิจการที่ลงลายมือชื่อ <span>·</span> แจ้งผู้ทำบัญชีกรณีขาดคุณสมบัติ <span>·</span> เข้าระบบ e-Accountant Plus ก่อนนำส่งงบการเงิน</div>
+        </div>
+        <div class="row">
+          <div class="code">ก5</div>
+          <div><div class="name">ผลการลงโทษและนโยบายจรรยาบรรณ</div><div class="act"><b>ต้องรู้ว่าอะไรผิดและผลเป็นอย่างไร</b></div></div>
+          <div class="meter"><div class="track"><div class="fill" style="width:10.8%"></div></div><div class="val">7</div></div>
+          <div class="ex">สรุปผลการลงโทษผู้ทำบัญชีและผู้สอบบัญชี ปี 2564–2568 <span>·</span> Workshop แนวร่วมผู้ทำบัญชีสีขาว <span>·</span> เจตจำนงไม่รับทำบัญชีนอมินี</div>
+        </div>
+        <div class="row">
+          <div class="code">ก6</div>
+          <div><div class="name">ท่าทีต่อหน่วยงานกำกับอื่น</div><div class="act"><b>ต้องรู้ว่ากติกาภายนอกเปลี่ยนอย่างไร</b></div></div>
+          <div class="meter"><div class="track"><div class="fill" style="width:15.4%"></div></div><div class="val">10</div></div>
+          <div class="ex">คำสั่งกรมสรรพากร ท.ป. 366/2569 <span>·</span> ขยายเวลาบังคับใช้ ท.ป. 368/2569 เป็น 1 ม.ค. 2570 <span>·</span> กรมพัฒนาธุรกิจฯ เตือนรู้ทันโจร</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="band" style="--bc:var(--r-b)">
+      <div class="bandhead">
+        <h3>ข · ผู้ให้บริการสมาชิก</h3>
+        <span class="bmeta">136 โพสต์ · 30%</span>
+        <p class="bvoice">น้ำเสียง: สภาฯ เป็นผู้ให้บริการ ข้อมูลวันเวลา ราคา และลิงก์ต้องถูกต้อง</p>
+      </div>
+      <div class="rowlist">
+        <div class="row">
+          <div class="code">ข1</div>
+          <div><div class="name">การทดสอบ: กำหนดการ รับสมัคร ผังที่นั่ง</div><div class="act"><b>ต้องสมัครหรือไปตามกำหนด</b></div></div>
+          <div class="meter"><div class="track"><div class="fill" style="width:49.2%"></div></div><div class="val">32</div></div>
+          <div class="ex">กำหนดการทดสอบ CPA ครั้งที่ 64 (3/2569) <span>·</span> ผังที่นั่งสอบ CPA ครั้งที่ 62 <span>·</span> เปิดสนามสอบจังหวัดอุบลราชธานี</div>
+        </div>
+        <div class="row">
+          <div class="code">ข2</div>
+          <div><div class="name">ผลสอบและรายชื่อผู้ผ่าน</div><div class="act"><b>ต้องค้นหาชื่อตัวเอง</b> — มีข้อมูลส่วนบุคคล</div></div>
+          <div class="meter"><div class="track"><div class="fill" style="width:26.2%"></div></div><div class="val">17</div></div>
+          <div class="ex">ประกาศสภาวิชาชีพบัญชี ที่ 33/2569 ผลการทดสอบ CPA ครั้งที่ 63 <span>·</span> รายชื่อผู้ผ่าน PIAC Part 1 ครั้งที่ 9</div>
+        </div>
+        <div class="row">
+          <div class="code">ข3</div>
+          <div><div class="name">หลักสูตรอบรมและสัมมนา</div><div class="act"><b>ต้องตัดสินใจสมัคร</b> — ประเภทที่มากที่สุดของปี</div></div>
+          <div class="meter"><div class="track"><div class="fill" style="width:100%"></div></div><div class="val">65</div></div>
+          <div class="ex">CFO Certification Program <span>·</span> TFRS ทุกฉบับ ปี 2569 รุ่นที่ 1/69 <span>·</span> การกำกับดูแล IT ระดับองค์กร รุ่นที่ 2/69</div>
+        </div>
+        <div class="row">
+          <div class="code">ข4</div>
+          <div><div class="name">ระบบและบริการออนไลน์</div><div class="act"><b>ต้องเข้าไปตั้งค่าหรืออัปเดต</b></div></div>
+          <div class="meter"><div class="track"><div class="fill" style="width:21.5%"></div></div><div class="val">14</div></div>
+          <div class="ex">ตั้งรหัสผ่านใหม่ TFAC Online Service <span>·</span> Automated Leadsheet Version 1.1.5 <span>·</span> ปิดให้บริการระบบ e-Service (SSO)</div>
+        </div>
+        <div class="row">
+          <div class="code">ข5</div>
+          <div><div class="name">สิทธิประโยชน์และมาตรการช่วยเหลือ</div><div class="act"><b>ต้องรู้ว่าตัวเองได้อะไร</b></div></div>
+          <div class="meter"><div class="track"><div class="fill" style="width:12.3%"></div></div><div class="val">8</div></div>
+          <div class="ex">อบรมฟรีตามมาตรการช่วยเหลือพิเศษ <span>·</span> “500 บาทต่อปี…มากกว่าค่าสมาชิก” <span>·</span> สภาฯ เคียงข้างสมาชิกในทุกสถานการณ์</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="band" style="--bc:var(--r-c)">
+      <div class="bandhead">
+        <h3>ค · สถาบันและธรรมาภิบาล</h3>
+        <span class="bmeta">142 โพสต์ · 31%</span>
+        <p class="bvoice">น้ำเสียง: สภาฯ เป็นองค์กร ชื่อ ตำแหน่ง และลำดับบุคคลต้องถูกต้องร้อยเปอร์เซ็นต์</p>
+      </div>
+      <div class="rowlist">
+        <div class="row">
+          <div class="code">ค1</div>
+          <div><div class="name">เลือกตั้งและการประชุมใหญ่</div><div class="act"><b>ต้องใช้สิทธิ</b> — เหตุการณ์ครั้งเดียวของปีนี้</div></div>
+          <div class="meter"><div class="track"><div class="fill" style="width:96.9%"></div></div><div class="val">63</div></div>
+          <div class="ex">TODAY วันนี้วันเลือกตั้ง <span>·</span> รู้จักหน้าระบบ e-Voting ก่อนใช้สิทธิจริง <span>·</span> ประกาศผลผู้ได้รับเลือกตั้ง <span>·</span> AGENDA ประชุมใหญ่วิสามัญ</div>
+        </div>
+        <div class="row">
+          <div class="code">ค2</div>
+          <div><div class="name">ผลงานและรายงานองค์กร</div><div class="act"><b>แค่รับรู้สถานะองค์กร</b></div></div>
+          <div class="meter"><div class="track"><div class="fill" style="width:12.3%"></div></div><div class="val">8</div></div>
+          <div class="ex">รายงานประจำปี 2568 <span>·</span> สรุปสมาชิกผู้มาใช้สิทธิเลือกตั้งกว่า 17,000 คน <span>·</span> Town Hall คณะกรรมการวาระปี 2569–2572</div>
+        </div>
+        <div class="row">
+          <div class="code">ค3</div>
+          <div><div class="name">ข่าวกิจกรรมและโครงการ</div><div class="act"><b>แค่รับรู้ หรือเข้าร่วมครั้งหน้า</b></div></div>
+          <div class="meter"><div class="track"><div class="fill" style="width:66.2%"></div></div><div class="val">43</div></div>
+          <div class="ex">Thailand Accounting Case Competition 2026 <span>·</span> TFAC Open House ครั้งที่ 2 <span>·</span> แคมป์นักบัญชีชุมชน <span>·</span> พิธีมอบวุฒิบัตร PIAC</div>
+        </div>
+        <div class="row">
+          <div class="code">ค4</div>
+          <div><div class="name">ความสัมพันธ์องค์กรและต่างประเทศ</div><div class="act"><b>แค่รับรู้</b> — แต่มีบุคคลภายนอกในภาพเสมอ</div></div>
+          <div class="meter"><div class="track"><div class="fill" style="width:29.2%"></div></div><div class="val">19</div></div>
+          <div class="ex">ต้อนรับคณะผู้แทน IAI อินโดนีเซีย <span>·</span> ร่วมแสดงความยินดีกรมสรรพากร ครบรอบ 111 ปี <span>·</span> ประชุม AFA Council ครั้งที่ 142</div>
+        </div>
+        <div class="row">
+          <div class="code">ค5</div>
+          <div><div class="name">ข่าวฝากจากหน่วยงานภายนอก</div><div class="act"><b>แค่รับรู้</b> — เนื้อหาไม่ได้เขียนโดยสภาฯ</div></div>
+          <div class="meter"><div class="track"><div class="fill" style="width:13.8%"></div></div><div class="val">9</div></div>
+          <div class="ex">ข่าวฝากจากตลาดหลักทรัพย์แห่งประเทศไทย <span>·</span> ข่าวฝากจากกรมพัฒนาธุรกิจการค้า <span>·</span> AICPA &amp; CIMA เปิดรับ CGMA YAP 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="band" style="--bc:var(--r-d)">
+      <div class="bandhead">
+        <h3>ง · ผู้นำความรู้และชุมชน</h3>
+        <span class="bmeta">131 โพสต์ · 28%</span>
+        <p class="bvoice">น้ำเสียง: สภาฯ เป็นเพื่อนร่วมวิชาชีพ ยืดหยุ่นได้มากที่สุด แต่ห้ามให้คำมั่นแทนมาตรฐาน</p>
+      </div>
+      <div class="rowlist">
+        <div class="row">
+          <div class="code">ง1</div>
+          <div><div class="name">บทความและความรู้วิชาชีพ</div><div class="act"><b>แค่เรียนรู้</b> — ไม่ผูกพันแทนมาตรฐาน</div></div>
+          <div class="meter"><div class="track"><div class="fill" style="width:76.9%"></div></div><div class="val">50</div></div>
+          <div class="ex">ESG กับทิศทางการปรับตัวของนักบัญชี ตอนที่ 12 <span>·</span> Fraud Risk Management <span>·</span> Tax Governance 2026 <span>·</span> Romance Scam</div>
+        </div>
+        <div class="row">
+          <div class="code">ง2</div>
+          <div><div class="name">วารสารและ Newsletter</div><div class="act"><b>ต้องไปอ่านฉบับเต็ม</b></div></div>
+          <div class="meter"><div class="track"><div class="fill" style="width:9.2%"></div></div><div class="val">6</div></div>
+          <div class="ex">วารสาร JFAC ปีที่ 8 ฉบับที่ 2 <span>·</span> TFAC Newsletter ฉบับที่ 117, 118 และ 119</div>
+        </div>
+        <div class="row">
+          <div class="code">ง3</div>
+          <div><div class="name">ซีรีส์คลิปให้ความรู้</div><div class="act"><b>ต้องดูต่อเป็นตอน</b> — ผูกกันเป็นชุด</div></div>
+          <div class="meter"><div class="track"><div class="fill" style="width:13.8%"></div></div><div class="val">9</div></div>
+          <div class="ex">How to Become a CPA EP.1–EP.7 <span>·</span> สรุปจบในคลิปเดียว ข้อบังคับการฝึกหัดงานสอบบัญชี <span>·</span> 8 เทคนิคเตรียมตัวก่อนสอบ CPA</div>
+        </div>
+        <div class="row">
+          <div class="code">ง4</div>
+          <div><div class="name">คอนเทนต์แบรนด์และสร้างการมีส่วนร่วม</div><div class="act"><b>แค่รู้สึกหรือร่วมสนุก</b></div></div>
+          <div class="meter"><div class="track"><div class="fill" style="width:26.2%"></div></div><div class="val">17</div></div>
+          <div class="ex">เกมจับสังเกต ใครคือนักบัญชี? <span>·</span> “ผลสอบ CPA เก็บได้ 7 ปี แต่ความฝันไม่จำเป็นต้องรอ 7 ปี” <span>·</span> SaWaDiKa ขึ้นรถครับ</div>
+        </div>
+        <div class="row">
+          <div class="code">ง5</div>
+          <div><div class="name">วันสำคัญ พิธีการ และสถาบัน</div><div class="act"><b>แค่รับรู้และร่วมแสดงความเคารพ</b></div></div>
+          <div class="meter"><div class="track"><div class="fill" style="width:56.9%"></div></div><div class="val">37</div></div>
+          <div class="ex">12 สิงหาคม วันคล้ายวันพระราชสมภพฯ <span>·</span> ๖ เมษายน วันจักรี <span>·</span> วันสงกรานต์ <span>·</span> ซินเจียยู่อี่ <span>·</span> วันแรงงานแห่งชาติ</div>
+        </div>
+        <div class="row">
+          <div class="code">ง6</div>
+          <div><div class="name">CSR และกิจกรรมเพื่อสังคม</div><div class="act"><b>อาจร่วมบริจาคหรือร่วมกิจกรรม</b></div></div>
+          <div class="meter"><div class="track"><div class="fill" style="width:18.5%"></div></div><div class="val">12</div></div>
+          <div class="ex">บริจาคหนังสือให้โครงการอ่านสร้างชาติ มูลนิธิกระจกเงา <span>·</span> ห่วงใยผู้ประสบอุทกภัยภาคเหนือ <span>·</span> โครงการนักบัญชีอาสา</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- คุณสมบัติ -->
+  <section>
+    <h2>สิ่งที่บันทึกแยก ไม่นับเป็นประเภท</h2>
+    <p class="sub">ห้าฟิลด์นี้คือที่ที่ “VDO content” ควรอยู่ — โพสต์หนึ่งชิ้นมีได้หลายค่าพร้อมกัน จึงเป็นคุณสมบัติ ไม่ใช่หมวดหมู่</p>
+    <div class="attrs">
+      <div><dt>ฟิลด์ 1</dt><b>รูปแบบสื่อ</b><p>ภาพนิ่ง · อัลบั้มภาพ · การ์ดชุด · อินโฟกราฟิก · คลิปวิดีโอ · Reels · ไลฟ์</p></div>
+      <div><dt>ฟิลด์ 2</dt><b>ช่องทาง</b><p>Facebook · LINE OA · YouTube · เว็บไซต์ · อีเมลสมาชิก · สิ่งพิมพ์</p></div>
+      <div><dt>ฟิลด์ 3</dt><b>ยิงโฆษณาหรือไม่</b><p>แยกผลออร์แกนิกออกจากผลที่ซื้อมา ไม่งั้นตัวเลขการเข้าถึงอ่านไม่ได้</p></div>
+      <div><dt>ฟิลด์ 4</dt><b>ซีรีส์</b><p>ชื่อชุด + ตอนที่ เช่น How to Become a CPA EP.5 · ESG ตอนที่ 12</p></div>
+      <div><dt>ฟิลด์ 5</dt><b>แคมเปญ</b><p>ชื่อแคมเปญที่ร้อยหลายประเภทเข้าด้วยกัน เช่น TFAC Election 2026 · นักบัญชีอาสา</p></div>
+    </div>
+  </section>
+
+  <!-- เคสยาก -->
+  <section>
+    <h2>เคสที่จัดยาก และคำตอบ</h2>
+    <p class="sub">ทดสอบผังกับโพสต์จริงที่เข้าได้สองประเภท เพื่อดูว่าหลักข้อ 04 ให้คำตอบเดียวกันจริงหรือไม่</p>
+    <div class="cases">
+      <div class="case">
+        <p class="quote">“ประกาศสภาวิชาชีพบัญชี ที่ 33/2569 เรื่อง ผลการทดสอบความรู้ของผู้ขอขึ้นทะเบียนเป็นผู้สอบบัญชีรับอนุญาต ครั้งที่ 63”</p>
+        <p class="verdict">ก1 ประกาศของสภาฯ หรือ ข2 ผลสอบ → <b>ข2</b></p>
+        <p class="why">ถ้าผู้อ่านไม่ทำอะไร <b>ผู้เสียประโยชน์คือตัวผู้เข้าสอบเอง</b> ไม่ใช่การฝ่าฝืนกฎที่มีบทลงโทษ คำว่า “ประกาศ” ในหัวเรื่องเป็นวิธีเผยแพร่ ไม่ใช่สาระของเนื้อหา</p>
+      </div>
+      <div class="case">
+        <p class="quote">“สภาวิชาชีพบัญชีออกประกาศมาตรฐานการสอบบัญชี (ฉบับปรับปรุง) และบทแก้ไขเพิ่มเติมอื่น ๆ รวม 6 ฉบับ”</p>
+        <p class="verdict">ก1 ประกาศของสภาฯ หรือ ก2 มาตรฐาน → <b>ก2</b></p>
+        <p class="why">ด้วยเหตุผลเดียวกันกลับด้าน — สิ่งที่ผู้อ่านต้องเอาไปใช้คือ<b>ตัวมาตรฐาน</b> ส่วนการ “ออกประกาศ” เป็นเพียงกลไกที่ทำให้มาตรฐานมีผล กฎที่ได้จากสองเคสนี้: <b>เมื่อมีคำว่าประกาศ ให้ดูว่าสาระที่ผู้อ่านต้องใช้คืออะไร แล้วจัดตามสาระ</b></p>
+      </div>
+      <div class="case">
+        <p class="quote">“พบกับการอบรมผ่านมุมมองวิทยากรผู้เชี่ยวชาญ ที่รวบรวมประเด็นสำคัญของ Agenda decision ฉบับที่น่าสนใจ”</p>
+        <p class="verdict">ก2 มาตรฐาน หรือ ข3 หลักสูตรอบรม → <b>ข3</b></p>
+        <p class="why">ปลายทางของโพสต์คือ<b>ให้สมัครอบรม</b> ไม่ใช่ให้เอามาตรฐานไปใช้ เนื้อหาวิชาการเป็นเพียงจุดขาย — โพสต์กลุ่มนี้ถูกกฎอัตโนมัติจัดผิดบ่อยที่สุด เพราะมีศัพท์มาตรฐานอยู่เต็มไปหมด</p>
+      </div>
+      <div class="case">
+        <p class="quote">“เตือนผู้สอบบัญชีรับอนุญาตที่ไม่แจ้งและยืนยันรายชื่อกิจการที่ตนลงลายมือชื่อ อาจเข้าข่ายความผิดจรรยาบรรณ”</p>
+        <p class="verdict">ก4 แจ้งเตือนสถานะ หรือ ก5 ผลการลงโทษ → <b>ก4</b></p>
+        <p class="why">ผู้อ่าน<b>ยังทำทันและยังไม่มีการลงโทษเกิดขึ้น</b> ก5 ใช้เมื่อผลการลงโทษเกิดขึ้นแล้วและเผยแพร่เป็นบทเรียน เส้นแบ่งคือ “ยังแก้ทัน” กับ “จบไปแล้ว”</p>
+      </div>
+      <div class="case">
+        <p class="quote">“สภาวิชาชีพบัญชี เดินหน้าต่อยอดความสำเร็จ โครงการนักบัญชีอาสา สู่ปีที่ 2 ร่วมกับมูลนิธิแม่ฟ้าหลวง”</p>
+        <p class="verdict">ค3 ข่าวกิจกรรม หรือ ง6 CSR → <b>ง6</b></p>
+        <p class="why">ประโยชน์ตกกับ<b>สังคมภายนอกวิชาชีพ</b> ไม่ใช่สมาชิก เส้นแบ่งที่ใช้ได้ทุกครั้ง: ผู้ได้ประโยชน์เป็นสมาชิก → ค3 ผู้ได้ประโยชน์เป็นคนนอก → ง6 ถ้าโพสต์เดียวกันเน้นพิธีมอบเกียรติบัตรให้สมาชิก ก็กลับไปเป็น ค3</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- สิ่งที่ตัวเลขบอก -->
+  <section>
+    <h2>สิ่งที่ตัวเลขทั้งปีบอก</h2>
+    <p class="sub">ผังที่ไม่มีหมวด “ทั่วไป” ทำให้อ่านสัดส่วนได้ตรง ๆ และสี่เรื่องนี้คือสิ่งที่โผล่ขึ้นมา</p>
+    <ul class="finds">
+      <li>
+        <div class="fig">4.6%<small>ก1 + ก2 + ก3</small></div>
+        <div>
+          <p class="ft">งานที่มีเพียงสภาฯ เท่านั้นที่ทำได้ คือ 1 ใน 22 โพสต์</p>
+          <p class="fd">ประกาศ มาตรฐาน และร่างมาตรฐานรวมกันทั้งปีมี 21 โพสต์ ขณะที่วันสำคัญและพิธีการอย่างเดียวมี 37 โพสต์ — เนื้อหาที่เป็นอำนาจเฉพาะขององค์กรถูกกลบด้วยเนื้อหาที่ใครก็โพสต์ได้เกือบสองเท่า</p>
+        </div>
+      </li>
+      <li>
+        <div class="fig">63<small>ค1 เลือกตั้ง</small></div>
+        <div>
+          <p class="ft">ปี 2569 ไม่ใช่ปีปกติ อย่าใช้เป็นฐานเทียบ</p>
+          <p class="fd">โพสต์เลือกตั้งและประชุมใหญ่ 63 ชิ้นเป็นเหตุการณ์ครั้งเดียว ถ้าตัดออก หมวด ค เหลือ 79 โพสต์ และ<b>หมวด ข ผู้ให้บริการสมาชิกจะกลายเป็นหมวดใหญ่ที่สุดของปีปกติ</b> — ตัวเลขฐานสำหรับวางแผนปี 2570 ควรใช้ 398 โพสต์ ไม่ใช่ 461</p>
+        </div>
+      </li>
+      <li>
+        <div class="fig">65<small>ข3 หลักสูตร</small></div>
+        <div>
+          <p class="ft">หนึ่งในเจ็ดโพสต์ของทั้งปีคือการขายหลักสูตร</p>
+          <p class="fd">เป็นประเภทเดี่ยวที่มากที่สุด และเป็นกลุ่มที่ถูกยิงโฆษณามากที่สุดด้วย ควรเป็นกลุ่มแรกที่ทำเทมเพลตมาตรฐานและชุดตรวจข้อมูล เพราะจำนวนมากพอที่การประหยัดเวลาต่อชิ้นจะเห็นผลจริง</p>
+        </div>
+      </li>
+      <li>
+        <div class="fig">~10<small>ครั้ง/ปี</small></div>
+        <div>
+          <p class="ft">เรื่องยืนยันการลงลายมือชื่อและยืนยันการทำบัญชี ถูกพูดซ้ำเกือบทุกเดือน</p>
+          <p class="fd">กระจายอยู่ใน ก4 ตั้งแต่มกราคมถึงกันยายน ด้วยถ้อยคำใหม่เกือบทุกครั้ง — สัญญาณว่าควรทำเป็นเนื้อหาถาวรหนึ่งชุดที่ลิงก์กลับได้ แทนการเขียนใหม่ทุกรอบ ซึ่งทั้งเปลืองเวลาและเสี่ยงให้ข้อมูลไม่ตรงกัน</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <div class="method">
+    <span><b>วิธีเก็บข้อมูล</b> เลื่อนไทม์ไลน์เพจ TFAC.FAMILY ย้อนหลังจนถึง 1 มกราคม 2569 เก็บข้อความเปิดของทุกโพสต์ ได้ 461 โพสต์ ไม่รวมคอมเมนต์และโพสต์ปี 2568</span>
+    <span><b>วิธีจัดประเภท</b> ใช้กฎคำสำคัญตามลำดับความจำเพาะ แล้วตรวจซ้ำด้วยมือในกลุ่มที่คาบเกี่ยว มีโพสต์ราว 5 ชิ้น (~1%) ที่กฎจัดผิดและแก้ด้วยมือ ตัวเลขจึงมีความคลาดเคลื่อนได้ประมาณ ±2%</span>
+    <span><b>ข้อจำกัด</b> จัดประเภทจากข้อความเปิดของโพสต์ ซึ่งบางชิ้นถูกตัดด้วย “ดูเพิ่มเติม” · ยังไม่ได้เก็บรูปแบบสื่อ ช่องทาง และสถานะการยิงโฆษณา ซึ่งต้องดึงจากหลังบ้านเพจ</span>
+  </div>
+
+</div>
+</body>
+</html>
