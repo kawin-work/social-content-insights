@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>เกณฑ์ความเสี่ยงเนื้อหา TFAC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Sarabun:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+
+<style>
+  :root{
+    --paper:#EEF1F5;
+    --surface:#FFFFFF;
+    --surface-2:#F6F8FA;
+    --ink:#14202E;
+    --ink-2:#48596F;
+    --ink-3:#6E7F94;
+    --line:#D3DAE3;
+    --line-soft:#E4E9EF;
+    --accent:#14466E;
+    --accent-soft:#E2EAF2;
+    --brass:#8E6526;
+    --brass-soft:#F2EADC;
+    --high:#A32018;
+    --high-soft:#FAE8E6;
+    --med:#8A5A10;
+    --med-soft:#F8EEDC;
+    --low:#25604A;
+    --low-soft:#E3F0EA;
+    --radius:3px;
+    --display:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,sans-serif;
+    --body:"Sarabun","IBM Plex Sans Thai",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0D1620;
+      --surface:#16212E;
+      --surface-2:#1B2836;
+      --ink:#E6ECF2;
+      --ink-2:#A7B7C8;
+      --ink-3:#7F90A2;
+      --line:#2B3949;
+      --line-soft:#223040;
+      --accent:#78AFDC;
+      --accent-soft:#1A2B3C;
+      --brass:#CB9E52;
+      --brass-soft:#2A2418;
+      --high:#EE8C82;
+      --high-soft:#331A19;
+      --med:#DCA749;
+      --med-soft:#2E2413;
+      --low:#5FC095;
+      --low-soft:#132A22;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0D1620;
+    --surface:#16212E;
+    --surface-2:#1B2836;
+    --ink:#E6ECF2;
+    --ink-2:#A7B7C8;
+    --ink-3:#7F90A2;
+    --line:#2B3949;
+    --line-soft:#223040;
+    --accent:#78AFDC;
+    --accent-soft:#1A2B3C;
+    --brass:#CB9E52;
+    --brass-soft:#2A2418;
+    --high:#EE8C82;
+    --high-soft:#331A19;
+    --med:#DCA749;
+    --med-soft:#2E2413;
+    --low:#5FC095;
+    --low-soft:#132A22;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.72;
+    margin:0;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{
+    max-width:1000px;
+    margin:0 auto;
+    padding-inline:20px;
+    padding-block:0 72px;
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead{
+    border-bottom:2px solid var(--ink);
+    padding-block:44px 20px;
+    margin-bottom:34px;
+  }
+  .eyebrow{
+    font-family:var(--display);
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.14em;
+    color:var(--brass);
+    margin:0 0 14px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .eyebrow::before{
+    content:"";
+    width:26px;height:2px;background:var(--brass);flex:none;
+  }
+  h1{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(28px,5.2vw,44px);
+    line-height:1.25;
+    letter-spacing:-.01em;
+    margin:0 0 10px;
+    text-wrap:balance;
+  }
+  .standfirst{
+    font-size:clamp(16px,2.2vw,18px);
+    color:var(--ink-2);
+    max-width:62ch;
+    margin:0 0 26px;
+  }
+  .docmeta{
+    display:flex;flex-wrap:wrap;gap:8px 28px;
+    font-size:13px;color:var(--ink-3);
+    font-family:var(--display);
+  }
+  .docmeta b{color:var(--ink-2);font-weight:600}
+
+  /* ---------- index ---------- */
+  nav.toc{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:18px 20px;
+    margin-bottom:46px;
+  }
+  nav.toc h2{
+    font-family:var(--display);font-size:11px;font-weight:600;
+    letter-spacing:.16em;color:var(--ink-3);margin:0 0 12px;
+  }
+  nav.toc ol{
+    list-style:none;margin:0;padding:0;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));
+    gap:6px 24px;
+  }
+  nav.toc a{
+    color:var(--ink-2);text-decoration:none;font-size:14.5px;
+    display:flex;gap:10px;align-items:baseline;
+    padding:3px 0;border-bottom:1px solid transparent;
+  }
+  nav.toc a:hover{color:var(--accent);border-bottom-color:var(--line)}
+  nav.toc .n{
+    font-family:var(--mono);font-size:12px;font-weight:600;
+    color:var(--brass);flex:none;
+  }
+
+  /* ---------- sections ---------- */
+  section{margin-bottom:56px;scroll-margin-top:24px}
+  h2.sec{
+    font-family:var(--display);
+    font-size:clamp(20px,3vw,25px);
+    font-weight:600;
+    line-height:1.35;
+    margin:0 0 6px;
+    padding-top:18px;
+    border-top:1px solid var(--line);
+    display:flex;gap:14px;align-items:baseline;
+    text-wrap:balance;
+  }
+  h2.sec .n{
+    font-family:var(--mono);font-size:13px;font-weight:600;
+    color:var(--brass);flex:none;letter-spacing:.04em;
+    transform:translateY(-2px);
+  }
+  .lede{color:var(--ink-2);max-width:66ch;margin:0 0 22px;padding-left:0}
+  h3{
+    font-family:var(--display);font-size:17px;font-weight:600;
+    margin:30px 0 10px;
+  }
+  p{margin:0 0 14px;max-width:70ch}
+  a{color:var(--accent)}
+
+  /* ---------- definition block ---------- */
+  .definition{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-left:4px solid var(--accent);
+    border-radius:var(--radius);
+    padding:26px 26px 22px;
+    margin-bottom:26px;
+  }
+  .definition .term{
+    font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:.14em;color:var(--accent);margin:0 0 12px;
+  }
+  .definition .statement{
+    font-family:var(--display);
+    font-size:clamp(18px,2.6vw,21px);
+    font-weight:500;line-height:1.6;margin:0 0 16px;max-width:52ch;
+    text-wrap:balance;
+  }
+  .definition .gloss{font-size:15px;color:var(--ink-2);margin:0;max-width:64ch}
+
+  .contrast{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:1px;background:var(--line);border:1px solid var(--line);
+    border-radius:var(--radius);overflow:hidden;margin-bottom:8px;
+  }
+  .contrast div{background:var(--surface);padding:16px 18px}
+  .contrast dt{
+    font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.1em;
+    margin-bottom:6px;
+  }
+  .contrast p{font-size:14.5px;margin:0;color:var(--ink-2)}
+  .c-high dt{color:var(--high)} .c-med dt{color:var(--med)} .c-low dt{color:var(--low)}
+
+  /* ---------- trigger list ---------- */
+  .rulebar{
+    font-family:var(--display);font-weight:600;font-size:15px;
+    background:var(--high-soft);color:var(--high);
+    border:1px solid color-mix(in srgb,var(--high) 30%,transparent);
+    border-radius:var(--radius);
+    padding:12px 18px;margin:0 0 22px;
+    display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;
+  }
+  .rulebar .tag{
+    font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+    opacity:.85;flex:none;
+  }
+
+  ol.triggers{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+  ol.triggers li{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:18px 20px 16px 20px;
+    display:grid;grid-template-columns:auto 1fr;gap:0 18px;
+  }
+  ol.triggers .num{
+    font-family:var(--mono);font-size:22px;font-weight:600;
+    color:var(--line);line-height:1.1;grid-row:span 3;
+  }
+  ol.triggers .tname{
+    font-family:var(--display);font-weight:600;font-size:16.5px;margin:0 0 6px;
+  }
+  ol.triggers .tdesc{font-size:15px;color:var(--ink-2);margin:0 0 10px;max-width:64ch}
+  ol.triggers .tex{
+    font-size:13.5px;color:var(--ink-3);margin:0;max-width:66ch;
+    padding-top:10px;border-top:1px dashed var(--line-soft);
+  }
+  ol.triggers .tex b{color:var(--ink-2);font-weight:600;font-family:var(--display)}
+
+  /* ---------- levels ---------- */
+  .levels{display:grid;gap:16px}
+  .level{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    display:grid;grid-template-columns:6px 1fr;
+  }
+  .level .stripe{background:var(--ln)}
+  .level-body{padding:22px 24px 20px}
+  .level.is-high{--ln:var(--high);border-color:color-mix(in srgb,var(--high) 35%,var(--line))}
+  .level.is-med{--ln:var(--med)}
+  .level.is-low{--ln:var(--low)}
+  .level-head{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;margin-bottom:12px}
+  .level-head .lvname{font-family:var(--display);font-weight:700;font-size:21px;margin:0;color:var(--ln)}
+  .level-head .lvcode{
+    font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.12em;
+    color:var(--ln);background:var(--lnsoft);padding:3px 9px;border-radius:99px;
+  }
+  .level.is-high{--lnsoft:var(--high-soft)}
+  .level.is-med{--lnsoft:var(--med-soft)}
+  .level.is-low{--lnsoft:var(--low-soft)}
+  .level .rule{font-size:15.5px;color:var(--ink);margin:0 0 16px;max-width:62ch}
+  .level .rule b{font-weight:600}
+  .specs{
+    list-style:none;margin:0;padding:0;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));
+    gap:1px;background:var(--line-soft);
+    border:1px solid var(--line-soft);border-radius:var(--radius);overflow:hidden;
+  }
+  .specs li{background:var(--surface-2);padding:12px 14px}
+  .specs dt{
+    font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.12em;
+    color:var(--ink-3);margin-bottom:5px;
+  }
+  .specs dd{margin:0;font-size:14.5px;color:var(--ink);line-height:1.55}
+  .specs dd b{font-weight:600}
+
+  /* ---------- tables ---------- */
+  .tablewrap{
+    overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--surface);
+  }
+  table{border-collapse:collapse;width:100%;min-width:720px;font-size:14.5px}
+  thead th{
+    font-family:var(--display);font-size:11.5px;font-weight:600;letter-spacing:.1em;
+    color:var(--ink-3);text-align:left;text-transform:uppercase;
+    padding:13px 14px;border-bottom:1px solid var(--line);
+    background:var(--surface-2);white-space:nowrap;
+  }
+  tbody td{
+    padding:13px 14px;border-bottom:1px solid var(--line-soft);
+    vertical-align:top;color:var(--ink-2);
+  }
+  tbody tr:last-child td{border-bottom:none}
+  td.code{font-family:var(--mono);font-weight:600;color:var(--brass);width:34px}
+  td.type{color:var(--ink);font-weight:500;font-family:var(--display);min-width:180px}
+  td.ex{font-size:13.5px;color:var(--ink-3);min-width:230px}
+  td.trg{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);white-space:nowrap}
+  .pill{
+    display:inline-block;font-family:var(--display);font-size:12px;font-weight:600;
+    padding:2px 10px;border-radius:99px;white-space:nowrap;
+  }
+  .p-high{background:var(--high-soft);color:var(--high)}
+  .p-med{background:var(--med-soft);color:var(--med)}
+  .p-low{background:var(--low-soft);color:var(--low)}
+  .tnote{font-size:13px;color:var(--ink-3);margin:12px 0 0}
+
+  /* ---------- escalation ---------- */
+  ul.bump{list-style:none;margin:0 0 8px;padding:0;display:grid;gap:9px}
+  ul.bump li{
+    display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:baseline;
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:13px 16px;font-size:15px;color:var(--ink-2);
+  }
+  ul.bump .arrow{
+    font-family:var(--mono);font-size:12px;font-weight:600;color:var(--med);
+    background:var(--med-soft);padding:2px 8px;border-radius:2px;flex:none;
+  }
+  ul.bump b{color:var(--ink);font-weight:600;font-family:var(--display)}
+
+  /* ---------- stop list ---------- */
+  .stoplist{
+    background:var(--high-soft);
+    border:1px solid color-mix(in srgb,var(--high) 28%,transparent);
+    border-radius:var(--radius);padding:22px 24px 18px;
+  }
+  .stoplist h3{margin:0 0 4px;color:var(--high);font-size:16px}
+  .stoplist p.sub{font-size:14px;color:var(--ink-2);margin:0 0 16px}
+  .stoplist ul{margin:0;padding:0;list-style:none;display:grid;gap:11px}
+  .stoplist li{
+    font-size:15px;color:var(--ink);padding-left:26px;position:relative;max-width:68ch;
+  }
+  .stoplist li::before{
+    content:"✕";position:absolute;left:0;top:0;
+    font-family:var(--mono);font-size:13px;font-weight:600;color:var(--high);
+  }
+
+  /* ---------- flow ---------- */
+  .flow{display:grid;gap:12px;counter-reset:step}
+  .step{
+    display:grid;grid-template-columns:auto 1fr;gap:18px;
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--radius);padding:16px 20px;
+  }
+  .step .sn{
+    font-family:var(--mono);font-size:12px;font-weight:600;
+    color:var(--accent);background:var(--accent-soft);
+    width:26px;height:26px;border-radius:99px;
+    display:grid;place-items:center;flex:none;
+  }
+  .step h4{font-family:var(--display);font-size:15.5px;font-weight:600;margin:0 0 4px}
+  .step p{font-size:14.5px;color:var(--ink-2);margin:0;max-width:64ch}
+
+  /* ---------- test cases ---------- */
+  .cases{display:grid;gap:14px}
+  .case{
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--radius);padding:18px 20px;
+  }
+  .case .quote{
+    font-family:var(--display);font-size:15.5px;font-weight:500;
+    margin:0 0 10px;color:var(--ink);max-width:60ch;
+  }
+  .case .quote::before{content:"“"} .case .quote::after{content:"”"}
+  .case .verdict{
+    display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;
+    margin-bottom:10px;font-size:13px;color:var(--ink-3);font-family:var(--mono);
+  }
+  .case .why{font-size:14.5px;color:var(--ink-2);margin:0;max-width:66ch}
+  .case .why b{color:var(--ink);font-weight:600;font-family:var(--display)}
+  .case.is-flag{border-color:color-mix(in srgb,var(--med) 40%,var(--line))}
+
+  /* ---------- callout ---------- */
+  .callout{
+    background:var(--brass-soft);
+    border:1px solid color-mix(in srgb,var(--brass) 30%,transparent);
+    border-radius:var(--radius);padding:18px 22px;margin-top:22px;
+  }
+  .callout h3{margin:0 0 6px;font-size:15.5px;color:var(--brass)}
+  .callout p{font-size:14.5px;color:var(--ink-2);margin:0 0 8px;max-width:68ch}
+  .callout p:last-child{margin-bottom:0}
+
+  footer{
+    border-top:2px solid var(--ink);padding-top:20px;margin-top:64px;
+    font-size:13px;color:var(--ink-3);display:grid;gap:6px;
+  }
+  footer b{color:var(--ink-2);font-weight:600}
+
+  @media (max-width:640px){
+    body{font-size:15.5px}
+    .level{grid-template-columns:4px 1fr}
+    .level-body{padding:18px 16px 16px}
+    ol.triggers li{grid-template-columns:1fr;gap:0}
+    ol.triggers .num{grid-row:auto;font-size:15px;margin-bottom:4px}
+    h2.sec{gap:10px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  a:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+  .sitenav{
+    display:flex;gap:18px;align-items:center;flex-wrap:wrap;
+    padding-block:18px 0;margin:0;font-size:13.5px;
+  }
+  .sitenav a{
+    color:var(--ink-2,#555);text-decoration:none;
+    border-bottom:1px solid currentColor;padding-bottom:1px;
+  }
+  .sitenav a:hover{color:var(--ink,#111)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="sitenav"><a href="./">สารบัญเอกสาร</a><a href="./taxonomy.html">ผังประเภทเนื้อหา</a></p>
+
+  <header class="masthead">
+    <p class="eyebrow">ร่างเสนอคณะกรรมการ · ส่วนงานสื่อสารองค์กร</p>
+    <h1>เกณฑ์ความเสี่ยงเนื้อหา<br>และการแบ่งงานสื่อสาร 3 ระดับ</h1>
+    <p class="standfirst">นิยาม “เนื้อหาความเสี่ยงสูง” ที่วัดได้ ไม่ขึ้นกับดุลพินิจของผู้ตรวจแต่ละคน พร้อมประเภทเนื้อหา ผู้อนุมัติ และรอบเวลาตรวจของแต่ละระดับ</p>
+    <div class="docmeta">
+      <span><b>องค์กร</b> สภาวิชาชีพบัญชี ในพระบรมราชูปถัมภ์</span>
+      <span><b>ฐานข้อมูล</b> โพสต์จริงบนเพจ TFAC.FAMILY 80 รายการ (3 ส.ค. – 17 ก.ย. 2569)</span>
+      <span><b>สถานะ</b> ร่าง 1.0 · 17 ก.ย. 2569</span>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="สารบัญ">
+    <h2>สารบัญ</h2>
+    <ol>
+      <li><a href="#s1"><span class="n">01</span>เจตนาและขอบเขต</a></li>
+      <li><a href="#s2"><span class="n">02</span>นิยาม “ความเสี่ยงสูง”</a></li>
+      <li><a href="#s3"><span class="n">03</span>เกณฑ์ตัดสิน 6 ข้อ</a></li>
+      <li><a href="#s4"><span class="n">04</span>งานสื่อสาร 3 ระดับ</a></li>
+      <li><a href="#s5"><span class="n">05</span>ตารางประเภทเนื้อหา</a></li>
+      <li><a href="#s6"><span class="n">06</span>กฎเลื่อนระดับ</a></li>
+      <li><a href="#s7"><span class="n">07</span>สิ่งที่ห้ามเผยแพร่</a></li>
+      <li><a href="#s8"><span class="n">08</span>ขั้นตอนและการบันทึก</a></li>
+      <li><a href="#s9"><span class="n">09</span>ผลการทดสอบเกณฑ์</a></li>
+    </ol>
+  </nav>
+
+  <!-- 01 -->
+  <section id="s1">
+    <h2 class="sec"><span class="n">01</span>เจตนาและขอบเขต</h2>
+    <p class="lede">ปัญหาที่เอกสารนี้แก้ ไม่ใช่ “ทีมไม่ระวัง” แต่คือ <b>คนสองคนอ่านโพสต์เดียวกันแล้วให้ระดับความเสี่ยงไม่ตรงกัน</b> — เพราะคำว่า “เสี่ยงสูง” ที่ผ่านมาไม่มีตัวชี้วัด เกณฑ์ชุดนี้จึงเขียนให้ตัดสินได้จากตัวเนื้อหา โดยไม่ต้องอาศัยประสบการณ์หรือดุลพินิจของผู้ตรวจแต่ละคน</p>
+    <p>ขอบเขต: ครอบคลุมทุกเนื้อหาที่ส่วนงานสื่อสารองค์กรเผยแพร่ในนามสภาวิชาชีพบัญชี — เพจ Facebook (TFAC.FAMILY), LINE OA, YouTube, เว็บไซต์ tfac.or.th, อีเมลถึงสมาชิก, สื่อสิ่งพิมพ์, การถ่ายทอดสด และโฆษณาแบบเสียค่าใช้จ่าย รวมถึง <b>การตอบคอมเมนต์และข้อความ</b> ซึ่งมีผลผูกพันเช่นเดียวกับโพสต์</p>
+    <p>ประเภทเนื้อหาในเอกสารนี้ไม่ได้คิดขึ้นใหม่ แต่จัดกลุ่มจากโพสต์ที่เผยแพร่จริงบนเพจในช่วง 6 สัปดาห์ที่ผ่านมา เพื่อให้กรรมการเห็นว่าแต่ละระดับหมายถึงงานชิ้นไหนของทีมจริง ๆ</p>
+  </section>
+
+  <!-- 02 -->
+  <section id="s2">
+    <h2 class="sec"><span class="n">02</span>นิยาม “เนื้อหาความเสี่ยงสูง”</h2>
+    <p class="lede">นิยามตั้งอยู่บนคำถามเดียวที่ตอบได้ทุกกรณี: <b>ถ้าเนื้อหานี้ผิด การลบโพสต์แก้ปัญหาได้หรือไม่</b></p>
+
+    <div class="definition">
+      <p class="term">นิยาม</p>
+      <p class="statement">เนื้อหาความเสี่ยงสูง คือ เนื้อหาที่เมื่อเผยแพร่ผิดพลาดแล้ว <b>ความเสียหายเกิดขึ้นทันทีและการลบโพสต์ไม่ทำให้กลับคืนสู่สภาพเดิม</b> เพราะไปกระทบสิทธิหรือสถานะทางกฎหมายของบุคคล ความเป็นส่วนตัว ความสัมพันธ์กับองค์กรภายนอก หรือความน่าเชื่อถือของสภาฯ ในฐานะผู้กำกับดูแลวิชาชีพ</p>
+      <p class="gloss">คำสำคัญคือ <b>“ย้อนกลับไม่ได้”</b> ไม่ใช่ “สำคัญ” หรือ “ผู้บริหารสนใจ” เนื้อหาสำคัญหลายชิ้นแก้ได้ด้วยการแก้โพสต์ — เนื้อหานั้นไม่ใช่ความเสี่ยงสูง</p>
+    </div>
+
+    <div class="contrast">
+      <div class="c-high">
+        <dt>ย้อนกลับไม่ได้ = สูง</dt>
+        <p>สมาชิกเห็นชื่อตัวเองในรายชื่อผู้สอบผ่านผิดพลาด แล้วแจ้งที่ทำงาน — ลบโพสต์แล้วก็แก้ไม่ได้</p>
+      </div>
+      <div class="c-med">
+        <dt>แก้ได้แต่ต้องชี้แจง = กลาง</dt>
+        <p>โปสเตอร์หลักสูตรระบุวันอบรมผิด — แก้โพสต์และแจ้งผู้สมัครได้ แต่เสียความเชื่อมั่นและมีต้นทุน</p>
+      </div>
+      <div class="c-low">
+        <dt>แก้ได้ทันที = ต่ำ</dt>
+        <p>คำผิดในแคปชันคลิปสร้างการมีส่วนร่วม — แก้แล้วจบ ไม่มีใครเสียประโยชน์</p>
+      </div>
+    </div>
+    <p class="tnote">หมายเหตุ: ทั้งสามช่องข้างต้นเป็นตัวอย่างสมมติเพื่ออธิบายนิยาม ไม่ใช่เหตุการณ์ที่เคยเกิดขึ้น</p>
+  </section>
+
+  <!-- 03 -->
+  <section id="s3">
+    <h2 class="sec"><span class="n">03</span>เกณฑ์ตัดสิน 6 ข้อ</h2>
+    <p class="lede">นิยามอย่างเดียวยังตีความต่างกันได้ จึงแปลงเป็นเกณฑ์ที่ตอบได้ว่า “ใช่/ไม่ใช่” ทีละข้อ</p>
+
+    <p class="rulebar"><span class="tag">กฎการใช้</span> เข้าเกณฑ์ <b>ข้อใดข้อหนึ่ง</b> = ความเสี่ยงสูงทันที ไม่ต้องนับคะแนน ไม่ต้องเข้าหลายข้อ</p>
+
+    <ol class="triggers">
+      <li>
+        <span class="num">01</span>
+        <div>
+          <p class="tname">ผลทางกฎหมายและสถานะสิทธิ</p>
+          <p class="tdesc">เนื้อหาที่ <b>สร้าง เปลี่ยนแปลง หรือยืนยัน</b> สิทธิ หน้าที่ หรือสถานะของสมาชิกและผู้ประกอบวิชาชีพ ไม่ว่าจะเป็นกำหนดเวลา ค่าธรรมเนียม คุณสมบัติ หรือบทลงโทษ</p>
+          <p class="tex"><b>ตัวอย่างจากเพจ</b> ประกาศสภาวิชาชีพบัญชี ที่ 33/2569 เรื่องผลการทดสอบ CPA ครั้งที่ 63 · กำหนดการทดสอบ CPA ครั้งที่ 64 (3/2569) · ประกาศคณะกรรมการจรรยาบรรณ ที่ 4/2569</p>
+        </div>
+      </li>
+      <li>
+        <span class="num">02</span>
+        <div>
+          <p class="tname">ข้อมูลที่ระบุตัวบุคคลได้</p>
+          <p class="tdesc">มีชื่อ ภาพใบหน้า เลขทะเบียน หรือข้อมูลที่เชื่อมโยงถึงตัวบุคคล โดยเฉพาะในบริบทที่อาจทำให้เสียหาย และทุกกรณีที่อยู่ภายใต้ พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล</p>
+          <p class="tex"><b>ตัวอย่างจากเพจ</b> รายชื่อผู้ผ่านเกณฑ์ PIAC Part 1–2 · รายชื่อผู้ผ่าน Self-Study CPD · ภาพผู้รับประกาศนียบัตรนักวางระบบบัญชี รุ่นที่ 3</p>
+        </div>
+      </li>
+      <li>
+        <span class="num">03</span>
+        <div>
+          <p class="tname">การพาดพิงองค์กรภายนอกหรือประเด็นสาธารณะ</p>
+          <p class="tdesc">เอ่ยถึงหน่วยงานรัฐ องค์กรวิชาชีพอื่น องค์กรต่างประเทศ สถาบันพระมหากษัตริย์ ศาสนา การเมือง หรือเหตุการณ์ที่มีคู่ขัดแย้ง — ความผิดพลาดเรื่องชื่อ ตำแหน่ง ลำดับ หรือถ้อยคำ กระทบความสัมพันธ์ที่ใช้เวลาสร้างหลายปี</p>
+          <p class="tex"><b>ตัวอย่างจากเพจ</b> ร่วมแสดงความยินดีกรมสรรพากร ครบรอบ 111 ปี · วันสถาปนาสภาทนายความ 41 ปี · ต้อนรับคณะผู้แทน IAI อินโดนีเซีย · 12 สิงหาคม วันคล้ายวันพระราชสมภพฯ</p>
+        </div>
+      </li>
+      <li>
+        <span class="num">04</span>
+        <div>
+          <p class="tname">การตีความมาตรฐานหรือให้คำแนะนำเชิงวิชาชีพ</p>
+          <p class="tdesc">เนื้อหาที่ผู้อ่านอาจนำไปใช้ปฏิบัติแทนตัวมาตรฐาน หรืออาจถูกอ้างในภายหลังว่าเป็น “แนวปฏิบัติของสภาฯ” ครอบคลุม TFRS จรรยาบรรณ ภาษี และการสอบบัญชี</p>
+          <p class="tex"><b>ตัวอย่างจากเพจ</b> คู่มืออธิบาย TFRS 18 · TFRS 19 กับบริษัทย่อยที่ไม่มีส่วนได้เสียสาธารณะ · มาตรฐานการรายงานทางการเงินฉบับปรับปรุงปี 2569</p>
+        </div>
+      </li>
+      <li>
+        <span class="num">05</span>
+        <div>
+          <p class="tname">กระบวนการที่ย้อนกลับไม่ได้และความเชื่อมั่นในระบบ</p>
+          <p class="tdesc">เกี่ยวกับการเลือกตั้ง ระบบลงคะแนน ระบบชำระเงิน ลิงก์เข้าสู่ระบบ การเตือนภัยทุจริตหรือการปลอมแปลง และการชี้แจงข่าวเชิงลบ — เนื้อหากลุ่มนี้ถูกปลอมแปลงเพื่อหลอกสมาชิกได้โดยตรง</p>
+          <p class="tex"><b>ตัวอย่างจากเพจ</b> ประกาศผลการเลือกตั้งนายกสภาวิชาชีพบัญชี · ลิงก์ e-voting.tfac.or.th · สรุปการดำเนินงานป้องกันการปลอมแปลงลายมือชื่อผู้สอบบัญชี · Alert ให้ผู้สอบบัญชียืนยันรายชื่อกิจการที่ลงลายมือชื่อ</p>
+        </div>
+      </li>
+      <li>
+        <span class="num">06</span>
+        <div>
+          <p class="tname">น้ำเสียงที่ขัดกับบทบาทผู้กำกับดูแลวิชาชีพ</p>
+          <p class="tdesc">เนื้อหาที่เนื้อความไม่ผิด แต่ <b>วิธีพูด</b> อาจถูกอ่านว่าสภาฯ รับรอง ชักชวน หรือให้คำมั่นในเรื่องที่ไม่ได้อยู่ในอำนาจ เช่น รายได้ ผลตอบแทน ความสำเร็จส่วนบุคคล หรือการตลาดที่กระตุ้นเกินจริง</p>
+          <p class="tex"><b>ที่มาของเกณฑ์ข้อนี้</b> เพิ่มขึ้นหลังทดสอบเกณฑ์ 5 ข้อแรกกับโพสต์จริง แล้วพบโพสต์ที่ข้อ 1–5 จับไม่ได้ แต่มีความเสี่ยงชัดเจน — ดูรายละเอียดในข้อ 09</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="callout">
+      <h3>กฎข้อสงสัย</h3>
+      <p>เมื่อผู้ตรวจสองคนให้ระดับไม่ตรงกัน <b>ให้ใช้ระดับที่สูงกว่าเสมอ</b> และบันทึกเหตุผลของทั้งสองฝ่ายไว้ในแบบฟอร์มสั่งงาน กรณีที่เถียงกันบ่อยจะถูกรวบรวมมาเพิ่มเป็นตัวอย่างในรอบทบทวนถัดไป ไม่ต้องหาข้อยุติในวันนั้น</p>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section id="s4">
+    <h2 class="sec"><span class="n">04</span>งานสื่อสาร 3 ระดับ</h2>
+    <p class="lede">ระดับความเสี่ยงกำหนดสามสิ่งพร้อมกัน: ใครอนุมัติได้ ใช้เวลาตรวจเท่าไร และเผยแพร่ช่องทางไหนได้บ้าง</p>
+
+    <div class="levels">
+
+      <article class="level is-high">
+        <div class="stripe"></div>
+        <div class="level-body">
+          <div class="level-head">
+            <h3 class="lvname" style="margin:0">ระดับ 1 · ความเสี่ยงสูง</h3>
+            <span class="lvcode">HIGH · เข้าเกณฑ์ข้อใดข้อหนึ่งใน 6 ข้อ</span>
+          </div>
+          <p class="rule">ผิดแล้ว<b>ย้อนกลับไม่ได้</b> — ต้องมีผู้อนุมัติที่รับผิดชอบทางการบริหารลงนาม และต้องมีฉบับที่ผ่านการตรวจแล้วเก็บเป็นหลักฐาน</p>
+          <ul class="specs">
+            <li><dt>ผู้อนุมัติ</dt><dd>เจ้าของเนื้อหา (หน่วยงานต้นเรื่อง) + ผู้จัดการส่วนงานสื่อสารองค์กร + <b>ผู้ช่วยผู้อำนวยการหรือผู้อำนวยการ</b></dd></li>
+            <li><dt>ผู้อนุมัติเพิ่ม</dt><dd>เข้าเกณฑ์ข้อ 2 หรือ 3 → เพิ่ม<b>นิติกร/ที่ปรึกษากฎหมาย</b> · งานใหญ่ที่บอร์ดมอบหมาย → <b>บอร์ดบริหาร</b></dd></li>
+            <li><dt>รอบเวลาตรวจ</dt><dd><b>3 วันทำการ</b> ก่อนกำหนดเผยแพร่ ผู้ตรวจอย่างน้อย 3 คน</dd></li>
+            <li><dt>ทางด่วนภาวะวิกฤต</dt><dd><b>2 ชั่วโมง</b> โดยผู้อำนวยการหรือกรรมการที่บอร์ดมอบหมาย 1 ท่าน แล้วบันทึกย้อนหลังใน 24 ชม.</dd></li>
+            <li><dt>ช่องทาง</dt><dd>ต้องขึ้นเว็บไซต์ tfac.or.th เป็นต้นฉบับก่อน แล้วจึงกระจายสู่ช่องทางอื่นโดยลิงก์กลับ</dd></li>
+            <li><dt>ยิงโฆษณา</dt><dd>ได้ เฉพาะเมื่อผู้อนุมัติระบุไว้เป็นลายลักษณ์อักษรว่าอนุมัติให้ใช้เป็นสื่อโฆษณา</dd></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="level is-med">
+        <div class="stripe"></div>
+        <div class="level-body">
+          <div class="level-head">
+            <h3 class="lvname" style="margin:0">ระดับ 2 · ความเสี่ยงกลาง</h3>
+            <span class="lvcode">MEDIUM · ไม่เข้าเกณฑ์ใด แต่มีข้อมูลผูกพัน</span>
+          </div>
+          <p class="rule">ผิดแล้ว<b>แก้ได้ด้วยการแก้ไขโพสต์และชี้แจง</b> — แต่มีวันที่ ราคา จำนวนชั่วโมง CPD สถานที่ หรือข้อมูลที่ผู้อ่านใช้ตัดสินใจ จึงต้องมีคนยืนยันข้อเท็จจริงนอกเหนือจากคนเขียน</p>
+          <ul class="specs">
+            <li><dt>ผู้อนุมัติ</dt><dd>ผู้จัดการส่วนงานสื่อสารองค์กร + <b>เจ้าของเนื้อหายืนยันข้อเท็จจริง</b> เป็นลายลักษณ์อักษร</dd></li>
+            <li><dt>รอบเวลาตรวจ</dt><dd><b>1 วันทำการ</b> ผู้ตรวจ 2 คน (คนเขียนไม่ตรวจงานตัวเอง)</dd></li>
+            <li><dt>สิ่งที่ต้องตรวจเสมอ</dt><dd>วันเวลา · ราคาและเงื่อนไข · ชั่วโมง CPD · ลิงก์สมัคร · ชื่อวิทยากรและตำแหน่ง</dd></li>
+            <li><dt>ช่องทาง</dt><dd>เผยแพร่ได้ทุกช่องทางที่ทีมดูแล ไม่ต้องรอเว็บไซต์</dd></li>
+            <li><dt>ยิงโฆษณา</dt><dd>ต้องเลื่อนเป็นระดับ 1 ก่อน (ดูข้อ 06)</dd></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="level is-low">
+        <div class="stripe"></div>
+        <div class="level-body">
+          <div class="level-head">
+            <h3 class="lvname" style="margin:0">ระดับ 3 · ความเสี่ยงต่ำ</h3>
+            <span class="lvcode">LOW · ไม่มีข้อมูลผูกพัน</span>
+          </div>
+          <p class="rule">ผิดแล้ว<b>แก้ได้ทันทีโดยไม่มีใครเสียประโยชน์</b> — ไม่มีตัวเลข วันที่ ลิงก์ หรือชื่อบุคคลที่ผู้อ่านต้องนำไปใช้</p>
+          <ul class="specs">
+            <li><dt>ผู้อนุมัติ</dt><dd>หัวหน้างานที่ดูแลช่องทางนั้น อนุมัติได้ในทีม</dd></li>
+            <li><dt>รอบเวลาตรวจ</dt><dd><b>4 ชั่วโมงทำการ</b> ผู้ตรวจ 1 คน</dd></li>
+            <li><dt>เพดานที่ต้องระวัง</dt><dd>ทันทีที่ใส่ลิงก์สมัคร วันที่ หรือชื่อบุคคลเข้าไป เนื้อหานั้น<b>ไม่ใช่ระดับ 3 อีกต่อไป</b></dd></li>
+            <li><dt>ช่องทาง</dt><dd>โซเชียลมีเดียทุกช่องทาง ไม่ขึ้นเว็บไซต์</dd></li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section id="s5">
+    <h2 class="sec"><span class="n">05</span>ตารางประเภทเนื้อหา</h2>
+    <p class="lede">ประเภทเนื้อหาทั้ง 15 กลุ่มนี้จัดจากโพสต์ที่เผยแพร่จริงบนเพจ ไม่ใช่หมวดหมู่สมมติ — ระดับที่ระบุคือ “ระดับตั้งต้น” ซึ่งเลื่อนขึ้นได้ตามข้อ 06</p>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th>รหัส</th><th>ประเภทเนื้อหา</th><th>ตัวอย่างจริงจากเพจ</th><th>ระดับตั้งต้น</th><th>เกณฑ์</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="code">A</td><td class="type">ประกาศ ข้อบังคับ หนังสือเวียนของสภาฯ</td><td class="ex">ประกาศสภาวิชาชีพบัญชี ที่ 33/2569 · ประกาศคณะกรรมการจรรยาบรรณ ที่ 4/2569 · ประกาศคณะกรรมการอำนวยการเลือกตั้ง ที่ 3/2569</td><td><span class="pill p-high">สูง</span></td><td class="trg">1</td></tr>
+          <tr><td class="code">B</td><td class="type">ผลสอบ รายชื่อผู้มีสิทธิ ผู้ผ่านเกณฑ์</td><td class="ex">ผลทดสอบ CPA ครั้งที่ 63 · PIAC Part 1 ครั้งที่ 9 และ Part 2 ครั้งที่ 7 · ผู้ผ่าน Self-Study CPD</td><td><span class="pill p-high">สูง</span></td><td class="trg">1 · 2</td></tr>
+          <tr><td class="code">C</td><td class="type">กำหนดการสอบ การรับสมัคร ค่าธรรมเนียม สนามสอบ</td><td class="ex">กำหนดการทดสอบ CPA ครั้งที่ 64 (3/2569) · เปิดรับสมัครทดสอบ PIAC · ขยายสนามสอบสู่สุราษฎร์ธานี</td><td><span class="pill p-high">สูง</span></td><td class="trg">1</td></tr>
+          <tr><td class="code">D</td><td class="type">เลือกตั้ง ธรรมาภิบาล และการประชุมใหญ่</td><td class="ex">TODAY วันนี้วันเลือกตั้ง · วิธีใช้ระบบ e-Voting · ประกาศผลผู้ได้รับเลือกตั้ง · คณะกรรมการวาระปี 2569–2572</td><td><span class="pill p-high">สูง</span></td><td class="trg">1 · 5</td></tr>
+          <tr><td class="code">E</td><td class="type">เตือนภัย ชี้แจง และภาวะวิกฤต</td><td class="ex">สรุปการดำเนินงานป้องกันการปลอมแปลงลายมือชื่อผู้สอบบัญชี · Alert ให้ยืนยันรายชื่อกิจการที่ลงลายมือชื่อ ม.ค.–มิ.ย. 2569</td><td><span class="pill p-high">สูง</span></td><td class="trg">1 · 5</td></tr>
+          <tr><td class="code">F</td><td class="type">มาตรฐานวิชาชีพ คู่มือ และการตีความ</td><td class="ex">คู่มืออธิบาย TFRS 18 · มาตรฐานฉบับปรับปรุงปี 2569 · Agenda decision</td><td><span class="pill p-high">สูง</span></td><td class="trg">4</td></tr>
+          <tr><td class="code">G</td><td class="type">พิธีการ วันสำคัญของชาติ และสถาบันพระมหากษัตริย์</td><td class="ex">12 สิงหาคม 2569 วันคล้ายวันพระราชสมภพ สมเด็จพระนางเจ้าสิริกิติ์ พระบรมราชินีนาถ พระบรมราชชนนีพันปีหลวง</td><td><span class="pill p-high">สูง</span></td><td class="trg">3</td></tr>
+          <tr><td class="code">H</td><td class="type">ความสัมพันธ์ระหว่างองค์กร แสดงความยินดี ต้อนรับคณะ</td><td class="ex">กรมสรรพากร ครบรอบ 111 ปี · สภาทนายความ 41 ปี · สภาการพยาบาล 41 ปี · กระทรวงพาณิชย์ 106 ปี · คณะผู้แทน IAI อินโดนีเซีย</td><td><span class="pill p-high">สูง</span></td><td class="trg">3</td></tr>
+          <tr><td class="code">I</td><td class="type">ข่าวฝากประชาสัมพันธ์จากหน่วยงานภายนอก</td><td class="ex">ข่าวฝากจากตลาดหลักทรัพย์แห่งประเทศไทย (CFO Conference 2026)</td><td><span class="pill p-high">สูง</span></td><td class="trg">3</td></tr>
+          <tr><td class="code">J</td><td class="type">บทความวิชาการ วารสาร JFAC และ Newsletter</td><td class="ex">TFRS 19 กับบริษัทย่อยที่ไม่มีส่วนได้เสียสาธารณะ · การจัดหายั่งยืนเพื่อปรับปรุงการดำเนินธุรกิจ ตอนที่ 2 · JFAC ปีที่ 8 ฉบับที่ 2</td><td><span class="pill p-med">กลาง</span></td><td class="trg">→ สูง ถ้าเข้าข้อ 4</td></tr>
+          <tr><td class="code">K</td><td class="type">หลักสูตรอบรม สัมมนา และการโปรโมต</td><td class="ex">CFO Certificate Program รุ่นที่ 27 · Strategic Cost Management for SME 2026 · การกำกับดูแล IT ระดับองค์กร รุ่นที่ 2/69</td><td><span class="pill p-med">กลาง</span></td><td class="trg">—</td></tr>
+          <tr><td class="code">L</td><td class="type">ข่าวกิจกรรมองค์กรและภาพบรรยากาศ</td><td class="ex">Town Hall คณะกรรมการวาระ 2569–2572 · Thailand Accounting Case Competition 2026 · แคมป์นักบัญชีชุมชน · โครงการนักบัญชีอาสา</td><td><span class="pill p-med">กลาง</span></td><td class="trg">→ สูง ถ้ามีบุคคลภายนอก</td></tr>
+          <tr><td class="code">M</td><td class="type">สิทธิประโยชน์สมาชิก ค่าบำรุง มาตรการช่วยเหลือ</td><td class="ex">“500 บาทต่อปี…มากกว่าค่าสมาชิก” · อบรมฟรีตามมาตรการช่วยเหลือพิเศษ · หลักสูตรวิกฤตโลกกับผลกระทบต่อผู้ประกอบวิชาชีพบัญชี</td><td><span class="pill p-med">กลาง</span></td><td class="trg">→ สูง ถ้าระบุเงื่อนไขสิทธิ</td></tr>
+          <tr><td class="code">N</td><td class="type">คอนเทนต์สร้างการมีส่วนร่วม Reels และคอนเทนต์เชิงอารมณ์</td><td class="ex">“ผลสอบ CPA เก็บได้ 7 ปี แต่ความฝันไม่จำเป็นต้องรอ 7 ปี” · คลิปวันแม่ · “SaWaDiKa ขึ้นรถครับ”</td><td><span class="pill p-low">ต่ำ</span></td><td class="trg">→ ดูข้อ 6</td></tr>
+          <tr><td class="code">O</td><td class="type">การตอบคอมเมนต์และข้อความ</td><td class="ex">คอมเมนต์แนบลิงก์สมัครสอบ · ตอบคำถามวิธีเข้าร่วมประชุมและลงคะแนนผ่านโน้ตบุ๊ก</td><td><span class="pill p-low">ต่ำ</span></td><td class="trg">→ สูง ถ้าตอบเรื่องสิทธิ</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">กลุ่ม A–I เป็นความเสี่ยงสูงทั้งหมด คิดเป็นราว 45% ของโพสต์ในช่วงที่สำรวจ ซึ่งแปลว่าภาระการตรวจระดับ 1 เป็นงานประจำ ไม่ใช่กรณีพิเศษ — เป็นเหตุผลที่ทางด่วนภาวะวิกฤตและผู้อนุมัติสำรองต้องถูกกำหนดไว้ล่วงหน้า</p>
+  </section>
+
+  <!-- 06 -->
+  <section id="s6">
+    <h2 class="sec"><span class="n">06</span>กฎเลื่อนระดับ</h2>
+    <p class="lede">เนื้อหาชิ้นเดียวกันมีความเสี่ยงไม่เท่ากันเมื่อบริบทเปลี่ยน กฎต่อไปนี้ทำให้ทีมไม่ต้องถกเถียงว่า “เคสนี้พิเศษไหม”</p>
+    <ul class="bump">
+      <li><span class="arrow">+1</span><span><b>นำไปยิงโฆษณา</b> — โฆษณาขยายการเข้าถึงและถูกเก็บไว้ในคลังโฆษณาสาธารณะ ลบโพสต์แล้วร่องรอยยังอยู่</span></li>
+      <li><span class="arrow">+1</span><span><b>เผยแพร่ในช่วง 7 วันก่อนถึง 7 วันหลัง</b> วันเลือกตั้ง วันประชุมใหญ่ หรือวันประกาศผลสอบ — ช่วงที่สมาชิกจับตาและมิจฉาชีพเคลื่อนไหวมากที่สุด</span></li>
+      <li><span class="arrow">+1</span><span><b>ถ่ายทอดสด หรือคลิปที่มีเสียงพูดของผู้บริหาร</b> — แก้ไขหลังเผยแพร่ไม่ได้ และถูกตัดต่อไปใช้ต่อได้</span></li>
+      <li><span class="arrow">+1</span><span><b>ปรากฏชื่อ ภาพ หรือตำแหน่งของบุคคลภายนอกสภาฯ</b> รวมถึงวิทยากร ผู้แทนหน่วยงาน และนักศึกษา</span></li>
+      <li><span class="arrow">+1</span><span><b>เป็นภาษาอังกฤษหรือสื่อสารกับผู้รับต่างประเทศ</b> — ถ้อยคำที่แปลคลาดเคลื่อนกระทบความสัมพันธ์ระดับองค์กร</span></li>
+      <li><span class="arrow">+1</span><span><b>เผยแพร่พร้อมกันตั้งแต่ 3 ช่องทางขึ้นไป</b> เพราะการเรียกคืนต้องทำครบทุกช่องทางจึงจะได้ผล</span></li>
+    </ul>
+    <p class="tnote">การเลื่อนระดับใช้ครั้งเดียวต่อเนื้อหาหนึ่งชิ้น — เข้าหลายข้อก็ยังเลื่อนขึ้นหนึ่งระดับ และเมื่อถึงระดับ 1 แล้วไม่มีระดับสูงกว่านั้น</p>
+  </section>
+
+  <!-- 07 -->
+  <section id="s7">
+    <h2 class="sec"><span class="n">07</span>สิ่งที่ห้ามเผยแพร่</h2>
+    <p class="lede">รายการนี้ไม่ใช่ความเสี่ยงสูง แต่คือเส้นที่ไม่ข้าม ไม่ว่าใครอนุมัติ</p>
+    <div class="stoplist">
+      <h3>หยุดเสมอ</h3>
+      <p class="sub">หากมีคำสั่งให้เผยแพร่รายการเหล่านี้ ให้ขอคำสั่งเป็นลายลักษณ์อักษรจากผู้อำนวยการหรือบอร์ดบริหารก่อน</p>
+      <ul>
+        <li>ชื่อหรือข้อมูลที่ระบุตัวผู้ถูกกล่าวหา ก่อนคดีจรรยาบรรณถึงที่สุดตามประกาศของคณะกรรมการจรรยาบรรณ</li>
+        <li>รายชื่อผู้ไม่ผ่านการทดสอบ คะแนนรายบุคคล หรือลำดับที่ของผู้เข้าสอบ</li>
+        <li>ความเห็นทางการเมือง หรือการเปรียบเทียบ ให้คุณ ให้โทษผู้สมัครรับเลือกตั้งของสภาฯ ในทุกช่องทาง</li>
+        <li>คำแนะนำที่ผูกพันแทนมาตรฐานหรือกฎหมาย โดยไม่ผ่านการรับรองจากคณะกรรมการวิชาชีพด้านที่เกี่ยวข้อง</li>
+        <li>ข้อมูลส่วนบุคคลของสมาชิกที่ยังไม่ได้รับความยินยอมตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล</li>
+        <li>ลิงก์ที่ไม่ได้อยู่บนโดเมนของสภาฯ สำหรับงานที่ต้องเข้าสู่ระบบหรือกรอกข้อมูลสมาชิก — ใช้ได้เฉพาะ <span style="font-family:var(--mono);font-size:13px">tfac.or.th · short.tfac.or.th · portal.tfac.or.th · e-voting.tfac.or.th</span></li>
+        <li>ตัวเลข สถิติ หรือผลการดำเนินงานของสภาฯ ที่ยังไม่ผ่านการรับรองจากหน่วยงานเจ้าของข้อมูล</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 08 -->
+  <section id="s8">
+    <h2 class="sec"><span class="n">08</span>ขั้นตอนและการบันทึก</h2>
+    <p class="lede">เกณฑ์จะมีผลจริงก็ต่อเมื่อระดับความเสี่ยงถูกกำหนดตั้งแต่ตอนรับงาน ไม่ใช่ตอนจะกดเผยแพร่</p>
+    <div class="flow">
+      <div class="step"><span class="sn">1</span><div><h4>รับงานและจัดระดับทันที</h4><p>ผู้รับงานกาเกณฑ์ 6 ข้อในแบบฟอร์มสั่งงานและแก้ไขงาน แล้วระบุระดับ 1/2/3 — ระดับเป็นตัวกำหนดวันส่งงาน ไม่ใช่วันส่งงานกำหนดระดับ</p></div></div>
+      <div class="step"><span class="sn">2</span><div><h4>ยืนยันข้อเท็จจริงกับเจ้าของเนื้อหา</h4><p>ทุกระดับตั้งแต่ 2 ขึ้นไป ต้องมีการยืนยันเป็นลายลักษณ์อักษรจากหน่วยงานต้นเรื่อง ไม่ใช้การยืนยันด้วยวาจา</p></div></div>
+      <div class="step"><span class="sn">3</span><div><h4>ตรวจตามรอบเวลาของระดับนั้น</h4><p>ผู้เขียนไม่ตรวจงานตัวเอง งานระดับ 1 ต้องมีฉบับที่ผู้อนุมัติลงนามเก็บไว้ ไม่ใช่การอนุมัติในแชท</p></div></div>
+      <div class="step"><span class="sn">4</span><div><h4>เผยแพร่ตามช่องทางที่ระดับอนุญาต</h4><p>งานระดับ 1 ขึ้นต้นฉบับบนเว็บไซต์ก่อน แล้วช่องทางอื่นลิงก์กลับ เพื่อให้มีแหล่งอ้างอิงเดียวเมื่อต้องแก้ไข</p></div></div>
+      <div class="step"><span class="sn">5</span><div><h4>บันทึกและทบทวน</h4><p>เพิ่มฟิลด์ “ระดับความเสี่ยง” และ “เกณฑ์ที่เข้า” ในแบบฟอร์มสั่งงาน เพื่อให้แดชบอร์ดของส่วนงานรายงานได้ว่าแต่ละเดือนมีงานระดับใดเท่าไร ใครเป็นคอขวด และมีงานที่ต้องแก้หลังเผยแพร่กี่ชิ้น</p></div></div>
+    </div>
+    <div class="callout">
+      <h3>ตัวชี้วัดที่เสนอให้รายงานต่อกรรมการ</h3>
+      <p><b>1.</b> สัดส่วนงานแต่ละระดับต่อเดือน · <b>2.</b> จำนวนงานระดับ 1 ที่เผยแพร่โดยไม่ผ่านรอบเวลาตรวจ · <b>3.</b> จำนวนเนื้อหาที่ต้องแก้ไขหรือถอนหลังเผยแพร่ แยกตามระดับ · <b>4.</b> เวลาเฉลี่ยที่ใช้รออนุมัติในแต่ละระดับ</p>
+      <p>ตัวชี้วัดข้อ 2 และ 3 คือคำตอบว่าเกณฑ์ชุดนี้ได้ผลหรือไม่ ถ้าตัวเลขไม่ลดลงใน 2 รอบทบทวน แปลว่าเกณฑ์ผิด ไม่ใช่คนผิด</p>
+    </div>
+  </section>
+
+  <!-- 09 -->
+  <section id="s9">
+    <h2 class="sec"><span class="n">09</span>ผลการทดสอบเกณฑ์กับโพสต์จริง</h2>
+    <p class="lede">นำเกณฑ์ไปทดสอบกับโพสต์ที่เผยแพร่จริง เพื่อดูว่าตัดสินได้จริงและมีช่องโหว่ตรงไหน</p>
+
+    <div class="cases">
+      <div class="case">
+        <p class="quote">ประกาศสภาวิชาชีพบัญชี ที่ 33/2569 เรื่อง ผลการทดสอบความรู้ของผู้ขอขึ้นทะเบียนเป็นผู้สอบบัญชีรับอนุญาต ครั้งที่ 63</p>
+        <p class="verdict"><span class="pill p-high">ระดับ 1</span> เกณฑ์ข้อ 1 + ข้อ 2 · ตัดสินได้ทันที</p>
+        <p class="why">กรณีที่เกณฑ์ทำงานตรงไปตรงมา ทั้งกำหนดสถานะทางวิชาชีพและมีชื่อบุคคล ไม่มีช่องให้ตีความต่างกัน</p>
+      </div>
+
+      <div class="case">
+        <p class="quote">หลักสูตร Strategic Cost Management for SME 2026</p>
+        <p class="verdict"><span class="pill p-med">ระดับ 2</span> → <span class="pill p-high">ระดับ 1</span> เมื่อยิงโฆษณา · กฎเลื่อนระดับข้อ 1</p>
+        <p class="why">โพสต์หลักสูตรเกือบทั้งหมดในช่วงที่สำรวจถูกยิงโฆษณา ซึ่งแปลว่า <b>งานที่ทีมมองว่าเป็นงานประจำ จริง ๆ แล้วเป็นงานระดับ 1 เกือบทุกชิ้น</b> — ข้อนี้กระทบภาระงานมากที่สุดและควรให้กรรมการตัดสินใจโดยตรง</p>
+      </div>
+
+      <div class="case">
+        <p class="quote">สภาวิชาชีพบัญชีร่วมแสดงความยินดี เนื่องในวันคล้ายวันสถาปนากรมสรรพากร ครบรอบปีที่ 111</p>
+        <p class="verdict"><span class="pill p-high">ระดับ 1</span> เกณฑ์ข้อ 3 · เป็นข้อที่ทีมมักประเมินต่ำกว่าจริง</p>
+        <p class="why">ดูเหมือนงานพิธีการทั่วไป แต่ชื่อหน่วยงาน ตำแหน่งผู้บริหาร จำนวนปีที่ครบรอบ และลำดับบุคคลในภาพ ต้องถูกต้องร้อยเปอร์เซ็นต์ ความผิดพลาดกระทบความสัมพันธ์ที่ใช้เวลาสร้างหลายปี และเป็นเหตุผลที่กลุ่ม H อยู่ระดับ 1 แม้จะเป็นงานที่ทำบ่อย</p>
+      </div>
+
+      <div class="case is-flag">
+        <p class="quote">ขอให้วันนี้เป็นวันของเรา 16.00 น. ขออนุญาตเปิดรับ “เศรษฐีใหม่”</p>
+        <p class="verdict"><span class="pill p-low">ตั้งต้น ต่ำ</span> → <span class="pill p-med">ระดับ 2</span> · <b style="font-family:var(--mono);color:var(--med)">ช่องโหว่ที่พบ</b></p>
+        <p class="why">เกณฑ์ 5 ข้อแรกจับโพสต์นี้ไม่ได้เลย เพราะไม่มีข้อมูลผูกพันและไม่ระบุตัวบุคคล แต่น้ำเสียงอาจถูกอ่านว่าองค์กรผู้กำกับดูแลวิชาชีพกำลังชวนเรื่องการหารายได้ <b>เกณฑ์ข้อ 6 ถูกเพิ่มขึ้นจากกรณีนี้</b> คอนเทนต์สร้างการมีส่วนร่วมยังอยู่ระดับ 3 ตามเดิม ยกเว้นเมื่อน้ำเสียงแตะเรื่องรายได้ ผลตอบแทน หรือคำมั่นเรื่องความสำเร็จ</p>
+      </div>
+
+      <div class="case is-flag">
+        <p class="quote">ท่านสามารถเข้าร่วมประชุมและลงคะแนนเลือกตั้งทางโน้ตบุ๊กได้ โดยเข้าร่วมประชุมและลงคะแนนเสียงเลือกตั้งออนไลน์…</p>
+        <p class="verdict"><span class="pill p-low">ตั้งต้น ต่ำ</span> → <span class="pill p-high">ระดับ 1</span> · <b style="font-family:var(--mono);color:var(--med)">ช่องโหว่ที่พบ</b></p>
+        <p class="why">นี่คือ<b>คอมเมนต์</b> ไม่ใช่โพสต์ แต่เนื้อหาคือการวินิจฉัยสิทธิการลงคะแนน ซึ่งเป็นระดับ 1 เต็มตัว — และเป็นจุดที่เกณฑ์รั่วมากที่สุด เพราะการตอบคอมเมนต์ไม่มีรอบตรวจ ข้อเสนอ: จัดทำ<b>ชุดคำตอบมาตรฐานที่อนุมัติล่วงหน้า</b> สำหรับคำถามเรื่องสิทธิ การสมัครสอบ และการเข้าระบบ คำถามที่ไม่มีในชุดให้ตอบว่า “ขอตรวจสอบและแจ้งกลับ” เท่านั้น</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <h3>สิ่งที่ยังต้องให้กรรมการชี้ขาด</h3>
+      <p><b>1.</b> โพสต์ที่ยิงโฆษณาต้องเป็นระดับ 1 ทุกชิ้นหรือไม่ — ถ้าใช่ ปริมาณงานระดับ 1 จะเพิ่มขึ้นมาก และต้องกำหนดผู้อนุมัติสำรอง</p>
+      <p><b>2.</b> ผู้อนุมัติระดับ 1 ควรเป็นผู้ช่วยผู้อำนวยการ ผู้อำนวยการ หรือกรรมการที่บอร์ดมอบหมาย — ชื่อตำแหน่งในเอกสารนี้เป็นข้อเสนอที่รอการยืนยัน</p>
+      <p><b>3.</b> การตอบคอมเมนต์เรื่องสิทธิ ควรเป็นหน้าที่ของส่วนงานสื่อสารองค์กร หรือส่งต่อให้หน่วยงานเจ้าของเรื่องตอบเอง</p>
+    </div>
+  </section>
+
+  <footer>
+    <span><b>ที่มาของตัวอย่าง</b> โพสต์สาธารณะบนเพจ สภาวิชาชีพบัญชี ในพระบรมราชูปถัมภ์ (facebook.com/TFAC.FAMILY) จำนวน 80 รายการ ระหว่าง 3 สิงหาคม – 17 กันยายน 2569</span>
+    <span><b>รอบทบทวน</b> ทุก 6 เดือน หรือเมื่อมีประกาศ ข้อบังคับ หรือโครงสร้างคณะกรรมการเปลี่ยนแปลง</span>
+    <span><b>ข้อจำกัด</b> ชื่อตำแหน่งผู้อนุมัติ รอบเวลาตรวจ และตัวชี้วัด เป็นข้อเสนอของส่วนงานสื่อสารองค์กร ยังไม่ผ่านการอนุมัติ · เอกสารนี้เป็นแนวปฏิบัติภายใน ไม่ใช่ความเห็นทางกฎหมาย</span>
+  </footer>
+
+</div>
+</body>
+</html>
